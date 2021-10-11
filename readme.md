@@ -4,7 +4,7 @@
 
 ---
 
-![img1](./img/img1.png)
+<img src="./img/img1.png" alt="img1" style="zoom:25%;" />
 
 In this project, android phone/ iphone is used as the head movement detector, and the spatial audio will be generated in real time.
 
