@@ -4,7 +4,7 @@
 
 ---
 
-![img1](img/img1.png)
+![img1](./img/img1.png)
 
 In this project, android phone/ iphone is used as the head movement detector, and the spatial audio will be generated in real time.
 
