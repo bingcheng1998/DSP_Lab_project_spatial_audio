@@ -1,16 +1,16 @@
-var indicator = document.querySelector('.indicator');
-var garden = document.querySelector('.garden');
-var output = document.querySelector('.output');
-var info = document.querySelector('.info');
-var doeSupported = document.getElementById("doeSupported");
+const indicator = document.querySelector('.indicator');
+const garden = document.querySelector('.garden');
+const output = document.querySelector('.output');
+const info = document.querySelector('.info');
+const doeSupported = document.getElementById("doeSupported");
 
-var maxX = garden.clientWidth  - indicator.clientWidth;
-var maxY = garden.clientHeight - indicator.clientHeight;
+const maxX = garden.clientWidth - indicator.clientWidth;
+const maxY = garden.clientHeight - indicator.clientHeight;
 
 function handleOrientation(event) {
-  var x = -event.beta;  // In degree in the range [-180,180)
-  var y = -event.gamma; // In degree in the range [-90,90)
-  var z = event.alpha;
+  let x = -event.beta;  // In degree in the range [-180,180)
+  let y = -event.gamma; // In degree in the range [-90,90)
+  const z = event.alpha;
 
   output.textContent  = `alpha: ${z}\n`;
   output.textContent += `beta : ${x}\n`;
@@ -33,27 +33,11 @@ function handleOrientation(event) {
   indicator.style.transform = "rotate("+z+"deg)";
 }
 
-
-
 if (window.DeviceOrientationEvent) {
   doeSupported.innerText = "✅ Browser is supported!";
+  window.addEventListener('deviceorientation', handleOrientation, true);
 } else {
   doeSupported.innerText = "❌ Browser Not Supported!\nPlease try Firefox Browser in Android phone.";
 }
 
-window.addEventListener('deviceorientation', handleOrientation, true);
-//
-// const sensor = new AbsoluteOrientationSensor();
-// Promise.all([navigator.permissions.query({ name: "accelerometer" }),
-//   navigator.permissions.query({ name: "magnetometer" }),
-//   navigator.permissions.query({ name: "gyroscope" })])
-//   .then(results => {
-//     if (results.every(result => result.state === "granted")) {
-//       info.textContent = "Has permissions";
-//       sensor.start();
-//     } else {
-//       console.log("No permissions to use AbsoluteOrientationSensor.");
-//       info.textContent = "No permissions";
-//     }
-//   });
-//
+
