@@ -1,0 +1,21 @@
+.garden {
+  position: relative;
+  width : 200px;
+  height: 200px;
+  border: 5px solid #CCC;
+  border-radius: 10px;
+}
+
+.ball {
+  border-radius: 15%;
+  width : 20px;
+  height: 20px;
+}
+
+.indicator {
+  position: absolute;
+  top   : 90px;
+  left  : 90px;
+  background: dodgerblue;
+  transform: rotate(180deg);
+}
