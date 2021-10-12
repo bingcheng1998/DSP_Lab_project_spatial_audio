@@ -16,6 +16,6 @@
   position: absolute;
   top   : 90px;
   left  : 90px;
-  background: dodgerblue;
+  background-image: linear-gradient(#ff3ba7, #3d88ff);
   transform: rotate(180deg);
 }
