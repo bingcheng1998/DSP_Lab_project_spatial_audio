@@ -1,3 +1,5 @@
+import {print} from './helper.js'
+
 // for cross browser way
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
@@ -17,9 +19,9 @@ function init() {
   if(listener.positionX) {
     listener.positionX.value = posX;
     listener.positionY.value = posY;
-    listener.positionZ.value = posZ-5;
+    listener.positionZ.value = posZ+10;
   } else {
-    listener.setPosition(posX, posY, posZ-5);
+    listener.setPosition(posX, posY, posZ+10);
   }
   // set the orientation of the head of listener
   if(listener.forwardX) {
@@ -42,7 +44,7 @@ function init() {
   const maxDistance = 20000;
   const refDistance = 1;
 
-  const rollOff = 0.5;
+  const rollOff = 0.3;
 
   const positionX = posX;
   const positionY = posY;
@@ -257,28 +259,42 @@ function init() {
         Cy = Math.cos(y/180 * Math.PI),
         Cz = Math.cos(z/180 * Math.PI);
       let Xx=Cy*Cz-Sx*Sy*Sz,
-        Xy=-Cx*Sz,
-        Xz=Cz*Sy+Cy*Sx*Sz,
-        Zx=-Cx*Sy,
-        Zy=Sx,
+        Yx=-Cx*Sz,
+        Zx=Cz*Sy+Cy*Sx*Sz,
+        Xy=Cz*Sx*Sy+Cy*Sz,
+        Yy=Cx*Cz,
+        Zy=-Cy*Cz*Sx+Sy*Sz,
+        Xz=-Cx*Sy,
+        Yz=Sx,
         Zz=Cx*Cy;
 
+      // info.textContent = `alpha: ${z}\n`;
+      // info.textContent += `beta : ${x}\n`;
+      // info.textContent += `gamma: ${y}\n`;
+      // info.textContent += `diff z is ${diff_values[0]}\n`;
+      info.textContent = print(['alpha','beta','gamma'],[z, x, y]);
+      info.textContent += print(['x','y','z'],[Xx, Xy, Xz]);
+      info.textContent += print(['x','y','z'],[Yx, Yy, Yz]);
+      info.textContent += print(['x','y','z'],[Zx, Zy, Zz]);
+      // info.textContent += `x = ${xx}\n`;
+      // info.textContent += `z = ${zz}\n\n`;
+      // info.textContent += `Xx = ${Xx}\n`;
+      // info.textContent += `Xy = ${Xy}\n`;
+      // info.textContent += `Xz = ${Xz}\n\n`;
+      // info.textContent += `Yx = ${Yx}\n`;
+      // info.textContent += `Yy = ${Yy}\n`;
+      // info.textContent += `Yz = ${Yz}\n\n`;
+      // info.textContent += `Zx = ${Zx}\n`;
+      // info.textContent += `Zy = ${Zy}\n`;
+      // info.textContent += `Zz = ${Zz}\n`;
 
-      zz = -Math.cos(diff_values[0]/180 * Math.PI);
-      xx = Math.sin(diff_values[0]/180 * Math.PI);
+      listener.forwardX.value = Yx;
+      listener.forwardY.value = Yz;
+      listener.forwardZ.value = -Yy;
+      listener.upX.value = Zx;
+      listener.upY.value = Zz;
+      listener.upZ.value = -Zy;
 
-      info.textContent = `alpha: ${z}\n`;
-      info.textContent += `beta : ${x}\n`;
-      info.textContent += `gamma: ${y}\n`;
-      info.textContent += `diff z is ${diff_values[0]}\n`;
-      info.textContent += `x = ${xx}\n`;
-      info.textContent += `z = ${zz}\n\n`;
-      info.textContent += `Xx = ${Xx}\n`;
-      info.textContent += `Xy = ${Xy}\n`;
-      info.textContent += `Xz = ${Xz}\n`;
-
-      listener.forwardX.value = xx;
-      listener.forwardZ.value = zz;
     });
   } else {
     console.log("error: DeviceOrientationEvent")
