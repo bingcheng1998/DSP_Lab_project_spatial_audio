@@ -11,9 +11,9 @@ function init(audioElements) {
   listener = audioCtx.listener;
 
   // Let's set the position of our listener based on where our boombox is.
-  const posX = window.innerWidth/2;
-  const posY = window.innerHeight/2;
-  const posZ = 300;
+  const posX = 0;
+  const posY = 0;
+  const posZ = 0;
 
   // set position of the listener
   if(listener.positionX) {
@@ -52,7 +52,7 @@ function init(audioElements) {
 
   const orientationX = 0.0;
   const orientationY = 0.0;
-  const orientationZ = 0.0;
+  const orientationZ = 1.0;
 
   // let's use the class method for creating our panner node and pass in all those parameters we've set.
 
@@ -149,9 +149,11 @@ function init(audioElements) {
     // add each track to the IMU control
     let audioElement =  audioPack[0];
     let pos = audioPack[1];
+    let gain = audioPack[2];
     console.log(pos);
     const track = audioCtx.createMediaElementSource(audioElement);
     const gainNode = audioCtx.createGain();
+    gainNode.gain.value = gain;
     const pannerOptions = {pan: 0};
     const stereoPanner = new StereoPannerNode(audioCtx, pannerOptions);
     track.connect(gainNode).connect(stereoPanner).connect(panner(pos)).connect(audioCtx.destination);
@@ -192,11 +194,16 @@ function playAudio(this_button, audioElement) {
 }
 
 // const audioElement = document.querySelector('audio');
-const a1 = [document.getElementById('a1'), [0,0,-10]];
-const a2 = [document.getElementById('a2'), [0, 0, 10]];
-const audioElements = [a1, a2]
+const getEl = (id) => document.getElementById(id);
+const a1 = [getEl('a1'), [0,0,-5], 0.4];
+const a2 = [getEl('a2'), [5, 0, 0], 1];
+const a3 = [getEl('a3'), [-5, 0, 0], 0.5];
+const audioElements = [a1, a2, a3]
 const playButton1 = document.getElementById('b1');
 playButton1.addEventListener('click', function () {playAudio(this, a1[0])}, false);
 
 const playButton2 = document.getElementById('b2');
 playButton2.addEventListener('click', function () {playAudio(this, a2[0])}, false);
+
+const playButton3 = document.getElementById('b3');
+playButton3.addEventListener('click', function () {playAudio(this, a3[0])}, false);

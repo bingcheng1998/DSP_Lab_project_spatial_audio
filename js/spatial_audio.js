@@ -9,9 +9,9 @@ function init() {
   listener = audioCtx.listener;
 
   // Let's set the position of our listener based on where our boombox is.
-  const posX = window.innerWidth/2;
-  const posY = window.innerHeight/2;
-  const posZ = 300;
+  const posX = 0;
+  const posY = 0;
+  const posZ = 0;
 
   // set position of the listener
   if(listener.positionX) {
@@ -42,7 +42,7 @@ function init() {
   const maxDistance = 20000;
   const refDistance = 1;
 
-  const rollOff = 0.5;
+  const rollOff = 1;
 
   const positionX = posX;
   const positionY = posY;
