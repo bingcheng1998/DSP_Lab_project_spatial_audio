@@ -44,7 +44,7 @@ function init() {
   const maxDistance = 20000;
   const refDistance = 1;
 
-  const rollOff = 0.3;
+  const rollOff = 1;
 
   const positionX = posX;
   const positionY = posY;

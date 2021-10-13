@@ -2,11 +2,13 @@ const indicator = document.querySelector('.indicator');
 const garden = document.querySelector('.garden');
 const output = document.querySelector('.output');
 const info = document.querySelector('.info');
+const arrow = document.querySelector('.arrow');
 const doeSupported = document.getElementById("doeSupported");
 
 const maxX = garden.clientWidth - indicator.clientWidth;
 const maxY = garden.clientHeight - indicator.clientHeight;
-
+const arrow_width = arrow.clientWidth;
+console.log("arrow"+arrow_width);
 function handleOrientation(event) {
   let x = -event.beta;  // In degree in the range [-180,180)
   let y = -event.gamma; // In degree in the range [-90,90)

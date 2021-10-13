@@ -1,8 +1,8 @@
 .garden {
   position: relative;
-  width : 200px;
-  height: 200px;
-  border: 5px solid #CCC;
+  width : min(100vh, 100vw);
+  height: min(100vh, 100vw);
+  border: 1px solid #ffffff;
   border-radius: 10px;
 }
 
@@ -14,8 +14,15 @@
 
 .indicator {
   position: absolute;
-  top   : 90px;
-  left  : 90px;
-  background-image: linear-gradient(#ff3ba7, #3d88ff);
-  transform: rotate(180deg);
+  top   : min(50vh, 50vw);
+  left  : min(50vh, 50vw);
+  /*background-image: linear-gradient(#ff3ba7, #3d88ff);*/
+  transform: rotate(0deg);
+}
+
+.arrow {
+  position: relative;
+  width: min(30vh, 30vw);
+  left: max(-12vh, -12vw);
+  top: max(-14vh, -14vw);
 }
