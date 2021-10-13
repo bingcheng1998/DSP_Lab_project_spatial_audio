@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-3D Spatial audio</title>
+</head>
+<body>
+<h3 id="move-boombox">Multi-3D Spatial Audio</h3>
+
+<!--<div class="control">-->
+
+<!--  <section class="master-controls">-->
+<!--    <input type="range" id="volume" class="control-volume" min="0" max="2" value="1" list="gain-vals" step="0.01" data-action="volume" />-->
+<!--    <datalist id="gain-vals">-->
+<!--      <option value="0" label="min"></option>-->
+<!--      <option value="2" label="max"></option>-->
+<!--    </datalist>-->
+<!--    <label for="volume">VOL</label>-->
+
+<!--    </p>-->
+
+<!--    <input type="range" id="panner" class="control-panner" list="pan-vals" min="-1" max="1" value="0" step="0.01" data-action="panner" />-->
+<!--    <datalist id="pan-vals">-->
+<!--      <option value="-1" label="left"></option>-->
+<!--      <option value="1" label="right"></option>-->
+<!--    </datalist>-->
+<!--    <label for="panner">PAN</label>-->
+
+<!--    </p>-->
+
+<!--    -->
+
+<!--    </p>-->
+<!--  </section>-->
+
+<!--  <section class="tape">-->
+
+<!--    -->
+
+<!--    -->
+<!--  </section>-->
+
+<!--  <div id="move-controls" aria-labelledby="move-boombox">-->
+<!--    -->
+<!--  </div>-->
+<!--</div>-->
+
+<button data-playing="false" id="b1" class="controls-play" role="switch" aria-checked="false">
+  <span>1: Play/Pause</span>
+</button>
+
+<button data-playing="false" id="b2" class="controls-play" role="switch" aria-checked="false">
+  <span>2: Play/Pause</span>
+</button>
+
+<!--<button class="control-power" role="switch" aria-checked="false" data-power="on">-->
+<!--  <span>On/Off</span>-->
+<!--</button>-->
+
+<audio id="a1" src="/assets/AcousticBlues.mp3" crossorigin="" loop></audio>
+<audio id="a2" src="/assets/arctic_a0001.wav" crossorigin="" loop></audio>
+
+<pre class="info"></pre>
+
+<script src="js/multi_3d_spatial_audio.js"></script>
+
+<!--<script src="js/3d_plot.js"></script>-->
+</body>
+</html>
