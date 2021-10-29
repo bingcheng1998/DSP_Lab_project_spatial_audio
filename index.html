@@ -14,46 +14,136 @@
 
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
-
-
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/orientation.css">
-
   <meta name="theme-color" content="#fafafa">
+  <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="semantic/semantic.min.js"></script>
+  <link rel="stylesheet" href="css/desktop-app.css">
 </head>
 
 <body>
 
-  <!-- Add your site or application content here -->
-  <a href="/audio.html">Go to audio</a>
-  <a href="/spatial_audio.html">Go to spatial audio</a>
-  <a href="/3d_spatial_audio.html">Go to 3d spatial audio</a>
-  <a href="/multi_3d_spatial_audio.html">Go to multi 3d spatial audio</a>
-
-  <h1>Sensor Test</h1>
-  <p>Test of phone orientation.</p>
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-
-
-
-  <div id = 'doeSupported'></div>
-  </p>
-  <div class="garden">
-      <div class="ball indicator"><img class="arrow" src="img/3d-up-arrow.svg" alt="Kiwi standing on oval"></div>
+<div class="phoneContent">
+  <div class="ui mini labeled icon inverted three item top fixed menu">
+    <a class="item" href="/">
+      <i class="gray user circle icon"></i>
+      User
+    </a>
+    <a class="item" href="/multi_3d_spatial_audio.html">
+      <i class="gray whmcs icon"></i>
+      Settings
+    </a>
+    <a class="item" href="/multi_3d_spatial_audio.html">
+      <i class="gray stack exchange icon"></i>
+      Equipment
+    </a>
   </div>
+</div>
 
-  <pre class="output"></pre>
-  <pre class="info"></pre>
+<div class="deskContent">
+  <div class="ui vertical inverted sidebar menu left visible">
+    <div class='item'>
+      <a><b> </b></a>
+    </div>
+    <div class='item'>
+      <a class="ui logo icon image">
+        <img src="icon.png">
+      </a>
+      <a>
+        <b>Feili Control</b>
+      </a>
+    </div>
 
-  <script src="js/orientation.js"></script>
+    <a class="item" href="/">
+      User info
+      <i class="gray user circle large icon"></i>
+    </a>
+    <a class="item" href="/multi_3d_spatial_audio.html">
+      Settings
+      <i class="gray whmcs large icon"></i>
+    </a>
+    <a class="item" href="/multi_3d_spatial_audio.html">
+      Equipment
+      <i class="gray stack exchange large icon"></i>
+    </a>
+    <div class='item'>
+      <a><b> </b></a>
+    </div>
+    <div class="right menu">
+      <div class="deskContent">
+        <a class="ui item" href="https://github.com/bingcheng1998/DSP_Lab_project_spatial_audio">
+          <div class="teal ui fluid button">
+            <i class="sign-out icon"></i>Sign out
+          </div>
+        </a>
+        <a class="ui item" routerLink="/desktop/login" *ngIf="!currentUser">
+          <div class="teal ui fluid button">
+            <i class="sign-in icon"></i>Sign in
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="pusher">
+    <div class="ui basic segment">
+      <h3 class="ui header">Application Content</h3>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+  </div>
+</div>
 
-  <div class="ios_access"></div>
-  <script src="js/ios_access.js"></script>
+  <!-- Add your site or application content here -->
+
+<div class=" dimmed">
+  <!--    <p></p>-->
+  <div >
+    <div>
+      <!--        <p></p>-->
+      <div style="color:white"><b>Designed by openmc.cn</b></div>
+
+      <a href="/multi_3d_spatial_audio.html">Go to multi 3d spatial audio</a>
+
+      <h1>Sensor Test</h1>
+      <p>Test of phone orientation.</p>
+      <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+      <script src="js/plugins.js"></script>
+      <script src="js/main.js"></script>
+
+      <div id = 'doeSupported'></div>
+      </p>
+      <div class="garden">
+        <div class="ball indicator"><img class="arrow" src="img/3d-up-arrow.svg" alt="Kiwi standing on oval"></div>
+      </div>
+
+      <pre class="output"></pre>
+      <pre class="info"></pre>
+
+      <script src="js/orientation.js"></script>
+
+      <div class="ios_access"></div>
+      <script src="js/ios_access.js"></script>
+
+      <div style="color:white"><b>Bingcheng Hu, 2021.9.1</b></div>
+      <!--        <p></p>-->
+      <div class="phoneContent">
+        <div style="color:white"><b>Powered by Feili Electron</b></div>
+        <div style="color:white"><b>http://www.shfeili.com/</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 <!--  <script>-->

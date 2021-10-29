@@ -23,8 +23,8 @@ For 2D spatial audio, you can detect the direction of the audio, but the height 
 ## TODO
 - [x] Use IMUs in phones to detect head position
 - [x] Do real time volume adjustment according to head position
-- [ ] Find good voice for different spatial point
-- [ ] 3D plot of head position and position of the spatial point
+- [x] Find good voice for different spatial point
+- [x] 3D plot of head position and position of the spatial point
 - [ ] Use AI facial position detector to make a desktop version of spatial audio
 
 ## References

@@ -1,0 +1,81 @@
+.ui.left.sidebar{
+  box-shadow: 0px 0px 20px rgba(34, 36, 38, 0.15);
+  width: 220px;
+  /*visibility: visible;*/
+  /*right: auto;*/
+  /*left: 0px;*/
+  /*display: block;*/
+  /*-webkit-box-orient: vertical;*/
+  /*-webkit-box-direction: normal;*/
+  /*-ms-flex-direction: column;*/
+  /*flex-direction: column;*/
+  /*backface-visibility: hidden;*/
+}
+.ui.labeled.icon.menu {
+  height: 60px;
+}
+
+.dimmed {
+
+  /*flex: 1 1 auto;*/
+  min-width: 0px;
+  max-height: 100%;
+  margin-top: 60px;
+}
+
+/*.dimmed @media all and (min-width: 480px) {*/
+/*    margin-left: 220px !important;*/
+/*}*/
+
+.container {
+  margin: 0 auto !important;
+}
+
+.main.container {
+  /*margin-top: 2em !important;*/
+  margin-left: 1em !important;
+  margin-right: 1em !important;
+  width: auto !important;
+  max-width: 960px !important;
+  /*margin-top: 1em !important;*/
+  /*overflow-y:hidden;*/
+  /*overflow: hidden;*/
+}
+
+.logo.image {
+  width: 35px;
+  margin-right: 1em;
+}
+
+.wppc{
+  display: none;
+}
+@media (min-width: 767px) {
+  .wppc{
+    display: block !important;
+    margin-top: 0.3em;
+  }
+}
+
+@media all and (min-width: 480px) {
+  .deskContent {display:block;}
+  .phoneContent {display:none;}
+  .dimmed {margin-left: 240px;}
+}
+
+@media all and (max-width: 479px) {
+  .deskContent {display:none;}
+  .phoneContent {display:block;}
+}
+
+.ui.bottom.menu{
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.menu {
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+}
