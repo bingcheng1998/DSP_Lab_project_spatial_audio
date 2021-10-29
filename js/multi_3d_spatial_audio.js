@@ -44,7 +44,7 @@ function init(audioElements) {
   const maxDistance = 20000;
   const refDistance = 1;
 
-  const rollOff = 1;
+  const rollOff = 0.8;
 
   const positionX = posX;
   const positionY = posY;
@@ -195,15 +195,22 @@ function playAudio(this_button, audioElement) {
 
 // const audioElement = document.querySelector('audio');
 const getEl = (id) => document.getElementById(id);
-const a1 = [getEl('a1'), [0,0,-5], 0.4];
-const a2 = [getEl('a2'), [5, 0, 0], 1];
-const a3 = [getEl('a3'), [-5, 0, 0], 0.5];
+const a1 = [getEl('a1'), [0,0,-5], 0.4]; // front
+const a2 = [getEl('a2'), [5, 0, 0], 1]; // right
+const a3 = [getEl('a3'), [-5, 0, 0], 0.5]; // left
 const audioElements = [a1, a2, a3]
-const playButton1 = document.getElementById('b1');
+const playButton1 = getEl('b1');
 playButton1.addEventListener('click', function () {playAudio(this, a1[0])}, false);
 
-const playButton2 = document.getElementById('b2');
+const playButton2 = getEl('b2');
 playButton2.addEventListener('click', function () {playAudio(this, a2[0])}, false);
 
-const playButton3 = document.getElementById('b3');
+const playButton3 = getEl('b3');
 playButton3.addEventListener('click', function () {playAudio(this, a3[0])}, false);
+
+const playAll = getEl('all');
+playAll.addEventListener('click', function () {
+  playAudio(playButton1, a1[0]);
+  playAudio(playButton2, a2[0]);
+  playAudio(playButton3, a3[0]);
+}, false)
