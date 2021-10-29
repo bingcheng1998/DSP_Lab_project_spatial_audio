@@ -1,21 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <title>Spatial Audio</title>
-  <meta name="description" content="">
+  <meta charset="UTF-8">
+  <title>Spatial Audio for Phones</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/orientation.css">
+
+  <meta name="theme-color" content="#fafafa">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="Spatial Audio">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <link rel="icon" href="icon.png" type="image/x-icon">
-  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/orientation.css">
@@ -23,7 +15,6 @@
   <script src="semantic/semantic.min.js"></script>
   <link rel="stylesheet" href="css/desktop-app.css">
 </head>
-
 <body>
 
 <div class="phoneContent">
@@ -89,45 +80,57 @@
   </div>
 </div>
 
-<!-- Add your site or application content here -->
-
 <div class=" dimmed">
   <div style="color:white"><b>Designed by omniai.org</b></div>
-  <h1>Spatial Audio for Everyone</h1>
-  <p>Test of phone orientation.</p>
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-
-  <div id = 'doeSupported'></div>
-  </p>
-  <div class="garden">
-    <div class="ball indicator"><img class="arrow" src="img/3d-up-arrow.svg" alt="Kiwi standing on oval"></div>
-  </div>
-
-  <pre class="output"></pre>
-  <pre class="info"></pre>
-
-  <script src="js/orientation.js"></script>
-
+  <h1>Spatial Audio for Phones</h1>
   <div class="ios_access"></div>
   <script src="js/ios_access.js"></script>
 
-  <div style="color:white"><b>Bingcheng Hu, 2021.10.27</b></div>
-  <div class="phoneContent">
-    <div style="color:white"><b>Powered by Omniai.org</b></div>
-    <div style="color:white"><b>http://omniai.org/</b></div>
+  <div>Please wear <b>headphones</b> before try this we-app.
+    And you should wait for about 10 seconds, for all audio files to load.</div></p>
+  </p>
+  When you are ready, please click️ this button to start the program:
+  <div align="center">
+    <button data-playing="false" id="all" class="controls-play" role="switch" aria-checked="false">
+      <span>all: Play/Pause</span>
+    </button></div>
+  </p>
+  You'll get 3 music track at 3 different places:
+  </p>
+  1. <button data-playing="false" id="b1" class="controls-play" role="switch" aria-checked="false">
+    <span> ⏯ (human voice)</span>
+  </button>
+  in front of you;
+  </p>
+  2. <button data-playing="false" id="b2" class="controls-play" role="switch" aria-checked="false">
+    <span> ⏯ (guitar)</span>
+  </button>
+  at you right hand;
+  </p>
+  3. <button data-playing="false" id="b3" class="controls-play" role="switch" aria-checked="false">
+    <span> ⏯ (drums)</span>
+  </button>
+  at your left hand;
+  </p>
+  And you can close one or two of them to focus on one channel.
+
+  <audio id="a1" src="/assets/human.wav" crossorigin="" loop></audio>
+  <audio id="a2" src="/assets/guitar.wav" crossorigin="" loop></audio>
+  <audio id="a3" src="/assets/drums.wav" crossorigin="" loop></audio>
+
+  <div class="garden">
+    <div class="ball indicator">
+      <div class="human">human</div>
+      <div class="guitar">guitar</div>
+      <div class="drums">drums</div>
+      <img class="arrow" src="img/3d-up-arrow.svg" alt="Kiwi standing on oval">
+    </div>
   </div>
+
+  <pre class="info"></pre>
+
+  <script src="js/multi_3d_spatial_audio.js"></script>
 </div>
 
-
-
-<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-<!--  <script>-->
-<!--    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;-->
-<!--    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')-->
-<!--  </script>-->
-<!--  <script src="https://www.google-analytics.com/analytics.js" async></script>-->
 </body>
-
 </html>
