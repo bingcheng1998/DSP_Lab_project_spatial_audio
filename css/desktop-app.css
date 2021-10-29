@@ -20,7 +20,6 @@
   /*flex: 1 1 auto;*/
   min-width: 0px;
   max-height: 100%;
-  margin-top: 60px;
 }
 
 /*.dimmed @media all and (min-width: 480px) {*/
@@ -60,12 +59,31 @@
 @media all and (min-width: 480px) {
   .deskContent {display:block;}
   .phoneContent {display:none;}
-  .dimmed {margin-left: 240px;}
+  .dimmed {
+    margin-left: 260px;
+    width: 60%;
+  }
+  .garden {
+    width : min(50vh, 50vw);
+    height: min(50vh, 50vw);
+  }
+  .indicator {
+    top   : min(25vh, 25vw);
+    left  : min(25vh, 25vw);
+  }
+  .arrow {
+    width: min(15vh, 15vw);
+    left: max(-6vh, -6vw);
+    top: max(-7vh, -7vw);
+  }
 }
 
 @media all and (max-width: 479px) {
   .deskContent {display:none;}
   .phoneContent {display:block;}
+  .dimmed {
+    margin-top: 60px;
+  }
 }
 
 .ui.bottom.menu{
