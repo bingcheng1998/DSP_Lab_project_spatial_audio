@@ -29,7 +29,7 @@ function getAccel() {
 
 if (iOS()) {
   var ios_access = document.querySelector('.ios_access');
-  ios_access.innerHTML += '<button id="accelPermsButton">grant ios access</button>';
+  ios_access.innerHTML += '<button id="accelPermsButton">Click here to grant ios access</button>';
   var accessGrant = document.getElementById("accelPermsButton");
   accessGrant.addEventListener ("click", getAccel, false);
 }

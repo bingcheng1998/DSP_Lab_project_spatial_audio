@@ -4,7 +4,10 @@ import {print} from './helper.js'
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
 let listener;
-
+const indicator = document.querySelector('.indicator');
+const garden = document.querySelector('.garden');
+const maxX = garden.clientWidth - indicator.clientWidth;
+const maxY = garden.clientHeight - indicator.clientHeight;
 function init(audioElements) {
 
   audioCtx = new AudioContext();
@@ -140,6 +143,9 @@ function init(audioElements) {
       listener.upY.value = Zz;
       listener.upZ.value = -Zy;
 
+      indicator.style.left  = (-maxY*(y-90)/180 - 10) + "px";
+      indicator.style.top = (-maxX*(x-90)/180 - 10) + "px";
+      indicator.style.transform = "rotate("+z+"deg)";
     });
   } else {
     console.log("error: DeviceOrientationEvent")
@@ -161,25 +167,16 @@ function init(audioElements) {
 }
 
 
-// BOOMBOX FUNCTIONALITY HERE ~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2
 function playAudio(this_button, audioElement) {
   if(!audioCtx) {
     init(audioElements);
   }
 
-  // check if context is in suspended state (autoplay policy)
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
   }
 
   if (this_button.dataset.playing === 'false') {
-    // audioElement.play();
-    // audioElement.addEventListener('ended', function() {
-    //   // this_button.dataset.playing = 'false';
-    //   // this_button.setAttribute( "aria-checked", "false" );
-    //   // this_button.currentTime = 0;
-    //   // this_button.play();
-    // }, false);
     audioElement.play();
     this_button.dataset.playing = 'true';
     // if track is playing pause it
@@ -193,11 +190,10 @@ function playAudio(this_button, audioElement) {
 
 }
 
-// const audioElement = document.querySelector('audio');
 const getEl = (id) => document.getElementById(id);
 const a1 = [getEl('a1'), [0,0,-5], 0.4]; // front
-const a2 = [getEl('a2'), [5, 0, 0], 1]; // right
-const a3 = [getEl('a3'), [-5, 0, 0], 0.5]; // left
+const a2 = [getEl('a2'), [5, 0, 0], 0.8]; // right
+const a3 = [getEl('a3'), [-5, 0, 0], 0.9]; // left
 const audioElements = [a1, a2, a3]
 const playButton1 = getEl('b1');
 playButton1.addEventListener('click', function () {playAudio(this, a1[0])}, false);

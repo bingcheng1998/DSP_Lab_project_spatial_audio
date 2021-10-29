@@ -2,7 +2,7 @@
   position: relative;
   width : min(100vh, 100vw);
   height: min(100vh, 100vw);
-  border: 1px solid #ffffff;
+  border: 1px solid #0a0404;
   border-radius: 10px;
 }
 
@@ -25,4 +25,19 @@
   width: min(30vh, 30vw);
   left: max(-12vh, -12vw);
   top: max(-14vh, -14vw);
+}
+
+.human {
+  position: absolute;
+  top: max(-20vh, -20vw);
+}
+
+.guitar {
+  position: absolute;
+  left: min(20vh, 20vw);
+}
+
+.drums {
+  position: absolute;
+  right: min(20vh, 20vw);
 }
