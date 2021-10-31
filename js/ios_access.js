@@ -29,9 +29,9 @@ function getAccel() {
 
 if (iOS()) {
   var ios_access = document.querySelector('.ios_access');
-  ios_access.innerHTML += 'For <b>iOS</b> user, please click this button first:</p>' +
-    '<button id="accelPermsButton">Click here to grant ios access</button></p>' +
-    '<div>Please use <b>chrome/firefox</b> in <b>iOS</b> devices, becasue <b>safari</b> is not fully supported.</div>' +
+  ios_access.innerHTML += 'For <b>iOS</b> user, please grant access first:</p>' +
+    '<button id="accelPermsButton">Allow access to gyroscope</button></p>' +
+    '<div>Please use <b>Chrome/Firefox</b> in <b>iOS</b> devices, becasue <b>Safari</b> is not fully supported.</div>' +
     '</p></p>';
   var accessGrant = document.getElementById("accelPermsButton");
   accessGrant.addEventListener ("click", getAccel, false);

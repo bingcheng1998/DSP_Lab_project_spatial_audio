@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Spatial Audio for Phones</title>
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/orientation.css">
 
   <meta name="theme-color" content="#fafafa">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/orientation.css">
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
   <script src="semantic/semantic.min.js"></script>
   <link rel="stylesheet" href="css/desktop-app.css">
@@ -27,7 +29,7 @@
       <i class="gray mobile alternate icon"></i>
       Phones
     </a>
-    <a class="item" href="/multi_3d_spatial_audio.html">
+    <a class="item" href="/spatial_audio_for_desktop.html">
       <i class="gray desktop icon"></i>
       Desktop
     </a>
@@ -56,7 +58,7 @@
       For phones only
       <i class="gray mobile alternate large icon"></i>
     </a>
-    <a class="item" href="/multi_3d_spatial_audio.html">
+    <a class="item" href="/spatial_audio_for_desktop.html">
       For desktop with camera
       <i class="gray desktop large icon"></i>
     </a>
@@ -82,38 +84,64 @@
 
 <div class=" dimmed">
   <div style="color:white"><b>Designed by omniai.org</b></div>
-  <h1>Spatial Audio for Phones</h1>
-  <div class="ios_access"></div>
-  <script src="js/ios_access.js"></script>
+  <div class="ui container">
+    <h1>Spatial Audio for Phones</h1>
 
-  <div>Please wear <b>headphones</b> before try this we-app.
-    And you should wait for about 10 seconds, for all audio files to load.</div></p>
-  </p>
-  When you are ready, please click️ this button to start the program:
-  <div align="center">
-    <button data-playing="false" id="all" class="controls-play" role="switch" aria-checked="false">
-      <span>all: Play/Pause</span>
-    </button></div>
-  </p>
-  You'll get 3 music track at 3 different places:
-  </p>
-  1. <button data-playing="false" id="b1" class="controls-play" role="switch" aria-checked="false">
-    <span> ⏯ (human voice)</span>
-  </button>
-  in front of you;
-  </p>
-  2. <button data-playing="false" id="b2" class="controls-play" role="switch" aria-checked="false">
-    <span> ⏯ (guitar)</span>
-  </button>
-  at you right hand;
-  </p>
-  3. <button data-playing="false" id="b3" class="controls-play" role="switch" aria-checked="false">
-    <span> ⏯ (drums)</span>
-  </button>
-  at your left hand;
-  </p>
-  And you can close one or two of them to focus on one channel.
+    <div class="deskInfo ui negative message">
+      <!--      <i class="close icon"></i>-->
+      <div class="header">
+        We're sorry that this tab only works for phones
+      </div>
+      <p>Please use iPhone/Android phone to try this web-app,
+        because we need to access the gyroscope for head position.
+      </p>
+    </div>
+    <p>In this Web-App, the user’s head position/direction will be measured with a gyroscope inside the smartphone. Users should keep the direction of the phone the same as their heads. And then the audio will be generated in real-time to mimic spatial audio.
+    </p>
+    <p>Please make sure your head is on the same direction of your phone to get best performance.
+    </p>
+    <p>We recommend that you tie your phone on top of your head, with the phone screen facing up, and the top of the phone facing the tip of your nose, as shown in the picture (the position of the headphone jack may be different from the picture).
+    </p>
 
+    <img class="ui medium centered image" src="img/img1.png">
+    </p>
+    <div class="ios_access"></div>
+    <script src="js/ios_access.js"></script>
+
+    <div>Please wear <b>headphones</b> before try this we-app.
+      And you should wait for about 10 seconds, for all audio files to load.</div></p>
+    </p>
+    When you are ready, please click️ this button to start the program:
+    </p>
+    <div align="center">
+      <button data-playing="false" id="all" class="controls-play ui labeled icon button" role="switch" aria-checked="false">
+        <i class="play icon"></i>
+        <span>Start</span>
+      </button></div>
+    </p>
+    You'll get 3 music track at 3 different places:
+    </p>
+    1. <button data-playing="false" id="b1" class="controls-play tiny ui labeled icon button" role="switch" aria-checked="false">
+    <i class="play icon"></i>
+    <span>human voice</span>
+  </button>
+    in front of you;
+    </p>
+    2. <button data-playing="false" id="b2" class="controls-play tiny ui labeled icon button" role="switch" aria-checked="false">
+    <i class="play icon"></i>
+    <span> guitar</span>
+  </button>
+    at you right hand;
+    </p>
+    3. <button data-playing="false" id="b3" class="controls-play tiny ui labeled icon button" role="switch" aria-checked="false">
+    <i class="play icon"></i>
+    <span>drums</span>
+  </button>
+    at your left hand;
+    </p>
+    And it's ok to open only one of them to focus on one channel.
+    </p>
+  </div>
   <audio id="a1" src="/assets/human.wav" crossorigin="" loop></audio>
   <audio id="a2" src="/assets/guitar.wav" crossorigin="" loop></audio>
   <audio id="a3" src="/assets/drums.wav" crossorigin="" loop></audio>
@@ -130,6 +158,11 @@
   <pre class="info"></pre>
 
   <script src="js/multi_3d_spatial_audio.js"></script>
+  <div class="ui compact message">
+    <p>We realized that wearing a mobile phone on top of your head is rather stupid,
+      so we decide to make a new version with the camera. Not finished yet,
+      please wait for one month more, sorry for this inconvenience.</p>
+  </div>
 </div>
 
 </body>

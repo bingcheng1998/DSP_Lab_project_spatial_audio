@@ -9,14 +9,16 @@ const maxX = garden.clientWidth - indicator.clientWidth;
 const maxY = garden.clientHeight - indicator.clientHeight;
 const arrow_width = arrow.clientWidth;
 console.log("arrow"+arrow_width);
+let z_flag = 3;
+let z_prev = 0;
 function handleOrientation(event) {
   let x = -event.beta;  // In degree in the range [-180,180)
   let y = -event.gamma; // In degree in the range [-90,90)
-  const z = event.alpha;
+  let z = event.alpha;
 
-  output.textContent  = `alpha: ${z}\n`;
-  output.textContent += `beta : ${x}\n`;
-  output.textContent += `gamma: ${y}\n`;
+  output.textContent  = `alpha: ${Number(z).toFixed(2)}\n`;
+  output.textContent += `beta : ${Number(x).toFixed(2)}\n`;
+  output.textContent += `gamma: ${Number(y).toFixed(2)}\n`;
 
   // Because we don't want to have the device upside down
   // We constrain the x value to the range [-90,90]
@@ -25,6 +27,12 @@ function handleOrientation(event) {
 
   // To make computation easier we shift the range of
   // x and y to [0,180]
+  if (z_flag > 0) {
+    z_flag --;
+    z_prev = z;
+  } else {
+    z = z - z_prev;
+  }
   x += 90;
   y += 90;
 
@@ -36,7 +44,7 @@ function handleOrientation(event) {
 }
 
 if (window.DeviceOrientationEvent) {
-  doeSupported.innerText = "✅ Browser is supported!";
+  doeSupported.innerText = "✅ gyroscopes is supported!";
   window.addEventListener('deviceorientation', handleOrientation, true);
 } else {
   doeSupported.innerText = "❌ Browser Not Supported!\nPlease try Firefox Browser in Android phone.";

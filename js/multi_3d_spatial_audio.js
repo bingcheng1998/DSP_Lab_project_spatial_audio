@@ -47,7 +47,7 @@ function init(audioElements) {
   const maxDistance = 20000;
   const refDistance = 1;
 
-  const rollOff = 0.8;
+  const rollOff = 0.9;
 
   const positionX = posX;
   const positionY = posY;
@@ -112,8 +112,8 @@ function init(audioElements) {
       prev_values[2] = diff_values[2];
 
       z = diff_values[0];
-      x = diff_values[1];
-      y = diff_values[2];
+      // x = diff_values[1];
+      // y = diff_values[2];
 
       let Sx = Math.sin(x/180 * Math.PI),
         Sy = Math.sin(y/180 * Math.PI),

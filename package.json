@@ -12,10 +12,18 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.16.0",
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
+    "@tensorflow-models/face-landmarks-detection": "^0.0.3",
+    "@tensorflow/tfjs-backend-webgl": "^3.11.0",
+    "@tensorflow/tfjs-converter": "^3.11.0",
+    "@tensorflow/tfjs-core": "^3.11.0",
+    "babel-polyfill": "^6.26.0",
     "js": "^0.1.0",
+    "stats-js": "^1.0.1",
+    "stats.js": "^0.17.0",
     "three": "^0.133.1"
   }
 }

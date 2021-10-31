@@ -84,6 +84,9 @@
   .dimmed {
     margin-top: 60px;
   }
+  .deskInfo {
+    display: none;
+  }
 }
 
 .ui.bottom.menu{

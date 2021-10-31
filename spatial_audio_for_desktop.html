@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spatial Audio for Desktop</title>
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/orientation.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/web-cam.css">
+  <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+  <link rel="stylesheet" href="css/desktop-app.css">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.106.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/scatter-gl@0.0.1/lib/scatter-gl.min.js"></script>
+</head>
+<body>
+<div class="phoneContent">
+  <div class="ui mini labeled icon inverted three item top fixed menu">
+    <a class="item" href="/">
+      <i class="gray home circle icon"></i>
+      Home
+    </a>
+    <a class="item" href="/spatial_audio_for_phones.html">
+      <i class="gray mobile alternate icon"></i>
+      Phones
+    </a>
+    <a class="item" href="/spatial_audio_for_desktop.html">
+      <i class="gray desktop icon"></i>
+      Desktop
+    </a>
+  </div>
+</div>
+
+<div class="deskContent">
+  <div class="ui vertical inverted sidebar menu left visible">
+    <div class='item'>
+      <a><b> </b></a>
+    </div>
+    <div class='item'>
+      <a class="ui logo icon image">
+        <img src="tile.png">
+      </a>
+      <a>
+        <b>Spatial Audio</b>
+      </a>
+    </div>
+
+    <a class="item" href="/">
+      Home
+      <i class="gray home circle large icon"></i>
+    </a>
+    <a class="item" href="/spatial_audio_for_phones.html">
+      For phones only
+      <i class="gray mobile alternate large icon"></i>
+    </a>
+    <a class="item" href="/spatial_audio_for_desktop.html">
+      For desktop with camera
+      <i class="gray desktop large icon"></i>
+    </a>
+    <div class='item'>
+      <a><b> </b></a>
+    </div>
+    <div class="right menu">
+      <div class="deskContent">
+        <a class="ui item" href="https://github.com/bingcheng1998/DSP_Lab_project_spatial_audio">
+          <div class="teal ui fluid button">
+            <i class="github icon"></i>Github
+          </div>
+        </a>
+        <a class="ui item" href="https://bingcheng.openmc.cn">
+          <div class="teal ui fluid button">
+            <i class="user icon"></i>About Author
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" dimmed">
+  <div style="color:white"><b>Designed by omniai.org</b></div>
+  <div class="ui container">
+    <h1>Spatial Audio for Desktop</h1>
+
+    Site is still under construction, sorry for this inconvenience.
+
+    <div id="main">
+      <div class="container">
+        <div id="stats" class="stats"></div>
+        <div class="canvas-wrapper" style="width: 500px; height: 500px;">
+          <canvas id="output" width="500" height="500"></canvas>
+          <video id="video" playsinline="" style="
+          -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+          visibility: hidden;
+          width: auto;
+          height: auto;
+          " width="500" height="500">
+          </video>
+        </div>
+        <div id="scatter-gl-container"></div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+<script src="/js/desktop_face_orientation.js"></script>
+
+</body>
+</html>
