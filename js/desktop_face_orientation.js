@@ -60,7 +60,7 @@ const VIDEO_SIZE = 500;
 const mobile = isMobile();
 // Don't render the point cloud on mobile in order to maximize performance and
 // to avoid crowding limited screen space.
-const renderPointcloud = mobile === false;
+const renderPointcloud = false;
 const stats = new Stats();
 const state = {
   backend: 'webgl',
@@ -141,7 +141,27 @@ async function renderPrediction() {
 
   if (predictions.length > 0) {
     predictions.forEach(prediction => {
-      const keypoints = prediction.scaledMesh;
+      const scaledMesh = prediction.scaledMesh;
+      const up = scaledMesh[10],
+        down = scaledMesh[152],
+        left = scaledMesh[234],
+        right = scaledMesh[454],
+        front = scaledMesh[4];
+
+      const run = (x, y, fun) => {
+        return [fun(x[0], y[0]), fun(x[1], y[1]), fun(x[2], y[2])]
+      }
+      const norm = (x) => {
+        const len = Math.sqrt(x[0]*x[0]+x[1]*x[1]+x[2]*x[2]);
+        return [x[0]/len, x[1]/len, x[2]/len];
+      }
+      const point_up = norm(run(up, down, (x, y)=>{return x - y}));
+      const center = run(left, right, (x,y)=>{return (x+y)/2});
+      const point_forward = norm(run(front, center, (x,y)=> {return x-y}));
+      // console.log(up);
+      // console.log(typeof up[0]);
+      console.log('up',point_up);
+      console.log('forward',point_forward);
 
       if (state.triangulateMesh) {
         ctx.strokeStyle = GREEN;
@@ -151,7 +171,7 @@ async function renderPrediction() {
           const points = [
             TRIANGULATION[i * 3], TRIANGULATION[i * 3 + 1],
             TRIANGULATION[i * 3 + 2]
-          ].map(index => keypoints[index]);
+          ].map(index => scaledMesh[index]);
 
           drawPath(ctx, points, true);
         }
@@ -159,8 +179,8 @@ async function renderPrediction() {
         ctx.fillStyle = GREEN;
 
         for (let i = 0; i < NUM_KEYPOINTS; i++) {
-          const x = keypoints[i][0];
-          const y = keypoints[i][1];
+          const x = scaledMesh[i][0];
+          const y = scaledMesh[i][1];
 
           ctx.beginPath();
           ctx.arc(x, y, 1 /* radius */, 0, 2 * Math.PI);
@@ -168,15 +188,15 @@ async function renderPrediction() {
         }
       }
 
-      if (keypoints.length > NUM_KEYPOINTS) {
+      if (scaledMesh.length > NUM_KEYPOINTS) {
         ctx.strokeStyle = RED;
         ctx.lineWidth = 1;
 
-        const leftCenter = keypoints[NUM_KEYPOINTS];
+        const leftCenter = scaledMesh[NUM_KEYPOINTS];
         const leftDiameterY = distance(
-          keypoints[NUM_KEYPOINTS + 4], keypoints[NUM_KEYPOINTS + 2]);
+          scaledMesh[NUM_KEYPOINTS + 4], scaledMesh[NUM_KEYPOINTS + 2]);
         const leftDiameterX = distance(
-          keypoints[NUM_KEYPOINTS + 3], keypoints[NUM_KEYPOINTS + 1]);
+          scaledMesh[NUM_KEYPOINTS + 3], scaledMesh[NUM_KEYPOINTS + 1]);
 
         ctx.beginPath();
         ctx.ellipse(
@@ -184,14 +204,14 @@ async function renderPrediction() {
           0, 0, 2 * Math.PI);
         ctx.stroke();
 
-        if (keypoints.length > NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS) {
-          const rightCenter = keypoints[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS];
+        if (scaledMesh.length > NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS) {
+          const rightCenter = scaledMesh[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS];
           const rightDiameterY = distance(
-            keypoints[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS + 2],
-            keypoints[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS + 4]);
+            scaledMesh[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS + 2],
+            scaledMesh[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS + 4]);
           const rightDiameterX = distance(
-            keypoints[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS + 3],
-            keypoints[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS + 1]);
+            scaledMesh[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS + 3],
+            scaledMesh[NUM_KEYPOINTS + NUM_IRIS_KEYPOINTS + 1]);
 
           ctx.beginPath();
           ctx.ellipse(
@@ -266,15 +286,6 @@ async function main() {
     faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
     {maxFaces: state.maxFaces});
   renderPrediction();
-
-  if (renderPointcloud) {
-    document.querySelector('#scatter-gl-container').style =
-      `width: ${VIDEO_SIZE}px; height: ${VIDEO_SIZE}px;`;
-
-    scatterGL = new ScatterGL(
-      document.querySelector('#scatter-gl-container'),
-      {'rotateOnStart': false, 'selectEnabled': false});
-  }
 };
 
 main();

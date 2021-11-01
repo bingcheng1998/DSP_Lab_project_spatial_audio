@@ -8,7 +8,7 @@ const doeSupported = document.getElementById("doeSupported");
 const maxX = garden.clientWidth - indicator.clientWidth;
 const maxY = garden.clientHeight - indicator.clientHeight;
 const arrow_width = arrow.clientWidth;
-console.log("arrow"+arrow_width);
+// console.log("arrow"+arrow_width);
 let z_flag = 3;
 let z_prev = 0;
 function handleOrientation(event) {
