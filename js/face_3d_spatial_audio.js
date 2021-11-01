@@ -3,10 +3,10 @@ import {print} from './helper.js'
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
 let listener;
-const indicator = document.querySelector('.indicator');
-const garden = document.querySelector('.garden');
-const maxX = garden.clientWidth - indicator.clientWidth;
-const maxY = garden.clientHeight - indicator.clientHeight;
+// const indicator = document.querySelector('.indicator');
+// const garden = document.querySelector('.garden');
+// const maxX = garden.clientWidth - indicator.clientWidth;
+// const maxY = garden.clientHeight - indicator.clientHeight;
 function init(audioElements) {
 
   audioCtx = new AudioContext();
@@ -78,76 +78,76 @@ function init(audioElements) {
   }
   //             [alpha, beta, gamma]
   //               [z, x, y] according to https://www.w3.org/TR/orientation-event/
-  let init_flags = [0, 0, 0];
-  let init_values = [0, 0, 0];
-  let prev_values = [0, 0, 0];
-  let diff_values = [0, 0, 0];
-  if (window.DeviceOrientationEvent) {
-    console.log("success: DeviceOrientationEvent")
-    window.addEventListener('deviceorientation', function (event) {
+  // let init_flags = [0, 0, 0];
+  // let init_values = [0, 0, 0];
+  // let prev_values = [0, 0, 0];
+  // let diff_values = [0, 0, 0];
+  if (true) {
+    window.addEventListener('build', function (event) {
       const info = document.querySelector('.info');
-      let z = event.alpha,
-        x = event.beta,
-        y = event.gamma;
-      // console.log(x+","+y+","+z);
-      let values = [z, x, y];
-      let exist_large_diff = 0;
-      const drop_size_for_calibration = 2;
-      for (let i = 0; i < 3; i ++) {
-        if (init_flags[i] < drop_size_for_calibration) {
-          init_flags[i] += 1;
-          init_values[i] = values[i];
-        }
-        diff_values[i] = values[i] - init_values[i];
-        if (Math.abs(prev_values[i] - diff_values[i]) > 1) {
-          exist_large_diff = 1;
-        }
-      }
-      if (exist_large_diff === 0) {
-        return;
-      }
-      prev_values[0] = diff_values[0];
-      prev_values[1] = diff_values[1];
-      prev_values[2] = diff_values[2];
 
-      z = diff_values[0];
-      // x = diff_values[1];
-      // y = diff_values[2];
+      // let z = event.alpha,
+      //   x = event.beta,
+      //   y = event.gamma;
+      // // console.log(x+","+y+","+z);
+      // let values = [z, x, y];
+      // let exist_large_diff = 0;
+      // const drop_size_for_calibration = 2;
+      // for (let i = 0; i < 3; i ++) {
+      //   if (init_flags[i] < drop_size_for_calibration) {
+      //     init_flags[i] += 1;
+      //     init_values[i] = values[i];
+      //   }
+      //   diff_values[i] = values[i] - init_values[i];
+      //   if (Math.abs(prev_values[i] - diff_values[i]) > 1) {
+      //     exist_large_diff = 1;
+      //   }
+      // }
+      // if (exist_large_diff === 0) {
+      //   return;
+      // }
+      // prev_values[0] = diff_values[0];
+      // prev_values[1] = diff_values[1];
+      // prev_values[2] = diff_values[2];
+      //
+      // z = diff_values[0];
+      // // x = diff_values[1];
+      // // y = diff_values[2];
+      //
+      // let Sx = Math.sin(x/180 * Math.PI),
+      //   Sy = Math.sin(y/180 * Math.PI),
+      //   Sz = Math.sin(z/180 * Math.PI),
+      //   Cx = Math.cos(x/180 * Math.PI),
+      //   Cy = Math.cos(y/180 * Math.PI),
+      //   Cz = Math.cos(z/180 * Math.PI);
+      // let Xx=Cy*Cz-Sx*Sy*Sz,
+      //   Yx=-Cx*Sz,
+      //   Zx=Cz*Sy+Cy*Sx*Sz,
+      //   Xy=Cz*Sx*Sy+Cy*Sz,
+      //   Yy=Cx*Cz,
+      //   Zy=-Cy*Cz*Sx+Sy*Sz,
+      //   Xz=-Cx*Sy,
+      //   Yz=Sx,
+      //   Zz=Cx*Cy;
+      let global_up = event.point_up;
+      let global_forward = event.point_forward;
 
-      let Sx = Math.sin(x/180 * Math.PI),
-        Sy = Math.sin(y/180 * Math.PI),
-        Sz = Math.sin(z/180 * Math.PI),
-        Cx = Math.cos(x/180 * Math.PI),
-        Cy = Math.cos(y/180 * Math.PI),
-        Cz = Math.cos(z/180 * Math.PI);
-      let Xx=Cy*Cz-Sx*Sy*Sz,
-        Yx=-Cx*Sz,
-        Zx=Cz*Sy+Cy*Sx*Sz,
-        Xy=Cz*Sx*Sy+Cy*Sz,
-        Yy=Cx*Cz,
-        Zy=-Cy*Cz*Sx+Sy*Sz,
-        Xz=-Cx*Sy,
-        Yz=Sx,
-        Zz=Cx*Cy;
-
-      info.textContent = print(['alpha','beta','gamma'],[z, x, y]);
-      info.textContent += print(['X: x','y','z'],[Xx, Xy, Xz]);
-      info.textContent += print(['Y: x','y','z'],[Yx, Yy, Yz]);
-      info.textContent += print(['Z: x','y','z'],[Zx, Zy, Zz]);
+      info.textContent = print(['u: x','y','z'],global_up);
+      info.textContent += print(['f: x','y','z'],global_forward);
       // Change the position of head and recalculate the volume on each ear
-      listener.forwardX.value = Yx;
-      listener.forwardY.value = Yz;
-      listener.forwardZ.value = -Yy;
-      listener.upX.value = Zx;
-      listener.upY.value = Zz;
-      listener.upZ.value = -Zy;
 
-      indicator.style.left  = (-maxY*(y-90)/180 - 10) + "px";
-      indicator.style.top = (-maxX*(x-90)/180 - 10) + "px";
-      indicator.style.transform = "rotate("+z+"deg)";
+      listener.forwardX.value = global_forward[0];
+      listener.forwardY.value = global_forward[1];
+      listener.forwardZ.value = global_forward[2];
+      listener.upX.value = global_up[0];
+      listener.upY.value = global_up[1];
+      listener.upZ.value = global_up[2];
+      console.log('up',global_up);
+      console.log('forward',global_forward);
+      // indicator.style.left  = (-maxY*(y-90)/180 - 10) + "px";
+      // indicator.style.top = (-maxX*(x-90)/180 - 10) + "px";
+      // indicator.style.transform = "rotate("+z+"deg)";
     });
-  } else {
-    console.log("error: DeviceOrientationEvent")
   }
 
   for (let audioPack of audioElements) {

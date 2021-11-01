@@ -123,6 +123,8 @@ async function setupCamera() {
   });
 }
 
+var event = new CustomEvent('build', { 'detail': '' });
+
 async function renderPrediction() {
   if (stopRendering) {
     return;
@@ -160,8 +162,12 @@ async function renderPrediction() {
       const point_forward = norm(run(front, center, (x,y)=> {return x-y}));
       // console.log(up);
       // console.log(typeof up[0]);
-      console.log('up',point_up);
-      console.log('forward',point_forward);
+      // console.log('up',point_up);
+      // console.log('forward',point_forward);
+      event.point_up = [-point_up[0], -point_up[1], point_up[2]];
+      event.point_forward = [-point_forward[0], -point_forward[1], point_forward[2]];
+      window.dispatchEvent(event);
+
 
       if (state.triangulateMesh) {
         ctx.strokeStyle = GREEN;
