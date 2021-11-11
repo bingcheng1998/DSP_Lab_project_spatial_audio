@@ -86,19 +86,27 @@
   <div class="ui container">
     <h1>Spatial Audio for Desktop</h1>
 
-    <p>Please use a device with front camera to try this web-app,
-      because we need to access the camera for your head position.
+    <p>Please use a device with front camera to try this web-app.
     </p>
     <p>In this Web-App, the user’s head position/direction will be measured with the front camera.
     </p>
     <p>We recommend you to use headphones for best experience.
     </p>
+    <img class="ui medium centered image" src="img/mesh.jpeg">
+    </p>
+      You should see the face mesh in the real-time video, just like the
+      image shows above. This face mesh model is from this github
+      <a href="https://github.com/tensorflow/tfjs-models/tree/master/face-landmarks-detection">link</a>.
+    </p>
+    <p>You may need to wait for seconds for the inference start process. And it's better to
+      choose a device that with FPS higher than 15. According to my experience,
+    phones always works better than desktop computers.</p>
 
     <div id="main">
       <div class="container">
         <div id="stats" class="stats"></div>
-        <div class="canvas-wrapper" style="width: 500px; height: 500px;">
-          <canvas id="output" width="500" height="500"></canvas>
+        <div class="canvas-wrapper">
+          <canvas id="output" width="500" height="500" style="border:1px solid"></canvas>
           <video id="video" playsinline="" style="
           -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
@@ -108,11 +116,11 @@
           " width="500" height="500">
           </video>
         </div>
-        <div id="scatter-gl-container"></div>
+<!--        <div id="scatter-gl-container"></div>-->
       </div>
     </div>
 
-
+    <p>If everything works well, you can start your tour in the spatial audio world!</p>
 
     <div align="center">
       <button data-playing="false" id="all" class="controls-play ui labeled icon button" role="switch" aria-checked="false">
@@ -142,7 +150,8 @@
     </p>
     And it's ok to open only one of them to focus on one channel.
     </p>
-
+    Now, you are all set! Turn your head left and right to experience spatial audio!
+    </p>
     <pre class="info"></pre>
   </div>
 </div>

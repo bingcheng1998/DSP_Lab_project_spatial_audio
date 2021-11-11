@@ -276,8 +276,13 @@ async function main() {
   video.height = videoHeight;
 
   canvas = document.getElementById('output');
+  // const w = window.innerWidth;
+  // const h = window.innerHeight;
+  // const shrinkProp = Math.min(videoWidth/w, videoHeight/h);
   canvas.width = videoWidth;
   canvas.height = videoHeight;
+  // videoWidth *= shrinkProp;
+  // videoHeight *= shrinkProp;
   const canvasContainer = document.querySelector('.canvas-wrapper');
   canvasContainer.style = `width: ${videoWidth}px; height: ${videoHeight}px`;
 
