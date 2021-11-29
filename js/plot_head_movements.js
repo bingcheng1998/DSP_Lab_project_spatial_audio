@@ -91,20 +91,24 @@ loader.load( glb, function ( gltf ) {
   console.error( error );
 } );
 
+const Page_height = screen.height;
+
 function moveCamera() {
-  const t = document.body.getBoundingClientRect().top;
-  // cube.rotation.y += 0.01;
-  // cube.rotation.z += 0.01;
+  // const t = document.body.getBoundingClientRect().top;
+  // camera.position.z = 30+t * -0.1;
+  // camera.position.y = t * - 0.02;
+  // camera.rotation.x =- t * -0.001;
 
-  camera.position.z = 30+t * -0.1;
-  // camera.position.x = -20 + t * - 0.02;
-  camera.position.y = t * - 0.02;
+  const p1 = document.getElementById('page1').getBoundingClientRect().top;
+  const p2 = document.getElementById('page2').getBoundingClientRect().top;
+  console.log(p1, p2, Page_height);
 
-  camera.rotation.x =- t * -0.001;
-
-  // if (headModel) {
-  //   headModel.rotation.y += 0.05;
-  // }
+  if (p2 < Page_height/5 && p2 > 0) {
+    const t = - Page_height/5 + p2;
+    camera.position.z = 30+t * -0.1;
+    camera.position.y = t * - 0.02;
+    camera.rotation.x =- t * -0.001;
+  }
 }
 document.body.onscroll = moveCamera;
 
@@ -113,6 +117,13 @@ const stats = new Stats();
 stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.getElementById('stats').appendChild(stats.dom);
 
+function removeElementsByClass(className){
+  const elements = document.getElementsByClassName(className);
+  while(elements.length > 0){
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+}
+
 function distance(a, b) {
   return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
 }
@@ -120,7 +131,6 @@ const norm = (x) => {
   const len = Math.sqrt(x[0]*x[0]+x[1]*x[1]+x[2]*x[2]);
   return [x[0]/len, x[1]/len, x[2]/len];
 }
-
 const mean = (x) => {
   const len = x.length;
   let sum = 0;
@@ -135,6 +145,8 @@ let betas = [0,0,0,0,0];
 let gammas = [0,0,0,0,0];
 let k = 0;
 const arrLen = alphas.length;
+
+let loadingExist = true;
 
 window.addEventListener('build', function (event) {
   if (headModel) {
@@ -168,6 +180,10 @@ window.addEventListener('build', function (event) {
     headModel.rotation.x = mean(alphas);
     headModel.rotation.y = -mean(betas);
     headModel.rotation.z = mean(gammas);
+
+    if (loadingExist) {
+      removeElementsByClass('loader');
+    }
   }
 });
 
@@ -181,10 +197,10 @@ function animate() {
   // controls.update();
   renderer.render(scene, camera);
   // stats.end();
-  requestAnimationFrame(animate);
-  // setTimeout( function() {
-  //   requestAnimationFrame( animate );
-  // }, 1000 / 24 );
+  // requestAnimationFrame(animate);
+  setTimeout( function() {
+    requestAnimationFrame( animate );
+  }, 1000 / 24 );
   stats.end();
 }
 requestAnimationFrame( animate );

@@ -17,21 +17,44 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 <!--  <script src="https://cdn.jsdelivr.net/npm/three@0.106.2/build/three.min.js"></script>-->
 <!--  <script src="https://cdn.jsdelivr.net/npm/scatter-gl@0.0.1/lib/scatter-gl.min.js"></script>-->
+  <style>
+    .loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      margin: -76px 0 0 -76px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+  </style>
 </head>
 
-<body>
+<body style="background-color:rgb(0,0,0);">
 <canvas id="bg"></canvas>
 
+<main class="loader"></main>
+
 <main>
-  <div class="full_height ui container">
+  <div class="full_height ui container" id="page1">
     <p>If everything works well, you can start your tour in the spatial audio world!</p>
     <p>home<a href="./"> home</a>
   </div>
-</main>
 
-
-<main>
-  <div class="ui container">
+  <div class="full_height ui container" id="page2">
     <div id="stats" class="stats"></div>
 
 <!--    <div class="canvas-wrapper">-->

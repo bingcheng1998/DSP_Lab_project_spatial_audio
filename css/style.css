@@ -8,9 +8,8 @@ main {
   position: absolute;
   color: aliceblue;
   width: 100%;
-  height: 100%;
   margin: 0px auto;
-  padding: 120px 0px;
+  padding: 0px 0px;
 
   /*display: grid;*/
   /*grid-template-columns: repeat(6, 1fr);*/
@@ -43,6 +42,7 @@ section {
   line-height: 1.5rem;
 }
 
-full_height {
-  height: 100%;
+.full_height {
+  height: 100vh;
+  padding: 2rem;
 }
