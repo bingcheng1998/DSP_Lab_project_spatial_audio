@@ -14,7 +14,7 @@
 <!--  <link rel="stylesheet" href="css/web-cam.css">-->
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
 <!--  <link rel="stylesheet" href="css/desktop-app.css">-->
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+<!--  <link rel="stylesheet" type="text/css" href="css/style.css">-->
   <script src="https://cdn.jsdelivr.net/npm/three@0.106.2/build/three.min.js"></script>
 <!--  <script src="https://cdn.jsdelivr.net/npm/scatter-gl@0.0.1/lib/scatter-gl.min.js"></script>-->
 </head>
@@ -27,17 +27,16 @@
   <div class="ui container">
     <div id="stats" class="stats"></div>
 
-    <div class="canvas-wrapper">
-      <canvas id="output" width="500" height="500" style="border:1px solid"></canvas>
-    </div>
+<!--    <div class="canvas-wrapper">-->
+<!--      <canvas id="output" width="500" height="500" style="border:1px solid"></canvas>-->
+<!--    </div>-->
 
     <video id="video" playsinline="" style="
           -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
-          visibility: hidden;
-          width: auto;
-          height: auto;
-          " width="500" height="500">
+          /*visibility: hidden;*/
+          display:none;
+          ">
     </video>
 
     <p>If everything works well, you can start your tour in the spatial audio world!</p>

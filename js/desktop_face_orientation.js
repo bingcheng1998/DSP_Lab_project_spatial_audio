@@ -64,7 +64,7 @@ const state = {
   backend: 'webgl',
   maxFaces: 1,
   triangulateMesh: true,
-  predictIrises: true
+  predictIrises: false
 };
 
 if (renderPointcloud) {

@@ -83,8 +83,8 @@ function init(audioElements) {
     let global_up = event.point_up;
     let global_forward = event.point_forward;
 
-    info.textContent = print(['u: x','y','z'],global_up);
-    info.textContent += print(['f: x','y','z'],global_forward);
+    // info.textContent = print(['u: x','y','z'],global_up);
+    // info.textContent += print(['f: x','y','z'],global_forward);
     // Change the position of head and recalculate the volume on each ear
 
     listener.forwardX.value = global_forward[0];
