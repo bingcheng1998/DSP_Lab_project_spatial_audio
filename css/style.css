@@ -46,3 +46,7 @@ section {
   height: 100vh;
   padding: 2rem;
 }
+
+.ui.toggle.checkbox label .ui.toggle.checkbox input:checked~.box, .ui.toggle.checkbox input:checked~label{
+  color: #00B5AD;
+}

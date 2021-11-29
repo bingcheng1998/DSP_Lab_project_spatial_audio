@@ -93,8 +93,8 @@ function init(audioElements) {
     listener.upX.value = global_up[0];
     listener.upY.value = global_up[1];
     listener.upZ.value = global_up[2];
-    console.log('up',global_up);
-    console.log('forward',global_forward);
+    // console.log('up',global_up);
+    // console.log('forward',global_forward);
     // indicator.style.left  = (-maxY*(y-90)/180 - 10) + "px";
     // indicator.style.top = (-maxX*(x-90)/180 - 10) + "px";
     // indicator.style.transform = "rotate("+z+"deg)";

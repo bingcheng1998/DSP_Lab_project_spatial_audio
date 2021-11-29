@@ -86,7 +86,7 @@ loader.load( glb, function ( gltf ) {
   headModel = gltf.scene;
   scene.add(headModel);
 }, function ( xhr ) {
-  console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+  // console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
 }, function ( error ) {
   console.error( error );
 } );
@@ -101,17 +101,22 @@ function moveCamera() {
 
   const p1 = document.getElementById('page1').getBoundingClientRect().top;
   const p2 = document.getElementById('page2').getBoundingClientRect().top;
-  console.log(p1, p2, Page_height);
+  // console.log(p1, p2, Page_height);
 
-  if (p2 < Page_height/5 && p2 > 0) {
-    const t = - Page_height/5 + p2;
+  if (p1>-Page_height/5) {
+  }else if (p2 < Page_height/5 && p2 > 0) {
+      const t = - Page_height/5 + p2;
+      camera.position.z = 30+t * -0.1;
+      camera.position.y = t * - 0.02;
+      camera.rotation.x =- t * -0.001;
+  } else if (p2 < 0) {
+    const t = - Page_height/5;
     camera.position.z = 30+t * -0.1;
     camera.position.y = t * - 0.02;
     camera.rotation.x =- t * -0.001;
   }
 }
 document.body.onscroll = moveCamera;
-
 
 const stats = new Stats();
 stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -147,7 +152,7 @@ let k = 0;
 const arrLen = alphas.length;
 
 let loadingExist = true;
-
+let mirror_reverse = -1;
 window.addEventListener('build', function (event) {
   if (headModel) {
     const info = document.querySelector('.info');
@@ -176,15 +181,27 @@ window.addEventListener('build', function (event) {
     k ++;
     if (k>arrLen) k = 0;
 
-    // console.log(alphas);
+    // mirror_reverse = -1 表示开启镜像
     headModel.rotation.x = mean(alphas);
-    headModel.rotation.y = -mean(betas);
-    headModel.rotation.z = mean(gammas);
+    headModel.rotation.y = mirror_reverse * mean(betas);
+    headModel.rotation.z = -mirror_reverse * mean(gammas);
 
     if (loadingExist) {
       removeElementsByClass('loader');
     }
   }
+});
+
+function mirrorSet(value) {
+  console.log('chacked?', value);
+  if(value) {
+    mirror_reverse = -1;
+  } else {
+    mirror_reverse = 1;
+  }
+}
+document.getElementById('mirror').addEventListener('click', function (){
+  mirrorSet(this.checked);
 });
 
 function animate() {
