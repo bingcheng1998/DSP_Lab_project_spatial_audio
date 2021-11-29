@@ -1,0 +1,44 @@
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+main {
+  position: absolute;
+  /*color: aliceblue;*/
+  width: 100%;
+  margin: 0px auto;
+  padding: 120px 0px;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+h1, h2, h3, blockquote {
+  font-family: elevon, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+header {
+  /*background: #555555;*/
+  grid-column: 2/span 8;
+  font-size: 2.5rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+section {
+  grid-column: 2/8;
+  padding: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+

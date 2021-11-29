@@ -3,8 +3,8 @@ import {print} from './helper.js'
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
 let listener;
-let n1, n2, n3, n4, n5, n6, n7;
-let analysers = [n1, n2, n3, n4, n5, n6, n7];
+let n1, n2, n3, n4, n5, n6, n7, n8;
+let analysers = [n1, n2, n3, n4, n5, n6, n7, n8];
 
 function init(audioElements) {
 
@@ -76,6 +76,7 @@ function init(audioElements) {
     })
   }
 
+  // listen on the face angle change from cs_face_orientation.js
   window.addEventListener('build', function (event) {
     const info = document.querySelector('.info');
 
@@ -92,19 +93,19 @@ function init(audioElements) {
     listener.upX.value = global_up[0];
     listener.upY.value = global_up[1];
     listener.upZ.value = global_up[2];
-    console.log('up',global_up);
-    console.log('forward',global_forward);
+    // console.log('up',global_up);
+    // console.log('forward',global_forward);
     // indicator.style.left  = (-maxY*(y-90)/180 - 10) + "px";
     // indicator.style.top = (-maxX*(x-90)/180 - 10) + "px";
     // indicator.style.transform = "rotate("+z+"deg)";
   });
 
   const track = audioCtx.createMediaElementSource(channels7);
-  const channelsCount = 7;
+  const channelsCount = 8;
   const splitterNode = new ChannelSplitterNode(audioCtx, { numberOfOutputs: channelsCount });
   track.connect(splitterNode);
 
-  const mergerNode = new ChannelMergerNode(audioCtx, { numberOfInputs: channelsCount });
+  // const mergerNode = new ChannelMergerNode(audioCtx, { numberOfInputs: channelsCount });
 
   for (let audioPack of audioElements) {
     // add each track to the IMU control
@@ -133,7 +134,7 @@ function init(audioElements) {
 
   function updateWave() {
     let dataArray = new Uint8Array(analysers[0].frequencyBinCount);
-    let maxValues = [null, null, null, null, null, null, null];
+    let maxValues = [null, null, null, null, null, null, null, null];
     for (let i = 0; i < analysers.length; i ++) {
       analysers[i].getByteTimeDomainData(dataArray);
       let maxValue = 128;
@@ -144,7 +145,8 @@ function init(audioElements) {
       }
       maxValue = Math.max(0, maxValue - 128);
       maxValues[i] = maxValue;
-      audioElements[i][0].style.backgroundColor = "rgb(170, 190, "+Math.min(255, maxValue * 10+180)+")";
+      audioElements[i][0].style.backgroundColor = "rgb("+Math.min(255, -maxValue * 20+224)+", 225, "+
+        Math.min(255, maxValue * 10+226)+")";
     }
     console.log(maxValues);
   }
@@ -176,14 +178,15 @@ function playAudio(thisButton, audioElement) {
 }
 
 const getEl = (id) => document.getElementById(id);
-const a1 = [getEl('b1'), [0,0,-5], 1, 0]; // front
-const a2 = [getEl('b2'), [5, 0, 0], 1, 1]; // right
-const a3 = [getEl('b3'), [-5, 0, 0], 1, 2]; // left
-const a4 = [getEl('b4'), [0,0,-5], 1, 3]; // front
-const a5 = [getEl('b5'), [5, 0, 0], 1, 4]; // right
-const a6 = [getEl('b6'), [-5, 0, 0], 1, 5]; // left
-const a7 = [getEl('b7'), [-5, 0, 0], 1, 6]; // left
-const audioElements = [a1, a2, a3, a4, a5, a6, a7];
+const a1 = [getEl('b1'), [-5, 0,-5], 1, 0]; // FL
+const a2 = [getEl('b2'), [5, 0, -5], 1, 1]; // FR
+const a3 = [getEl('b3'), [0, 0, -5], 1, 2]; // C
+const a4 = [getEl('b4'), [0, 0,  0], 0, 3]; // LFE (mute by default)
+const a5 = [getEl('b5'), [-5, 0, 5], 1, 4]; // BL
+const a6 = [getEl('b6'), [5, 0,  5], 1, 5]; // BR
+const a7 = [getEl('b7'), [-5, 0, 0], 1, 6]; // SL
+const a8 = [getEl('b8'), [ 5, 0, 0], 1, 7]; // SR
+const audioElements = [a1, a2, a3, a4, a5, a6, a7, a8];
 
 const channels7 = getEl('channels7');
 
