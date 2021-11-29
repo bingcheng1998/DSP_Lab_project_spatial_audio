@@ -93,7 +93,7 @@ async function setupCamera() {
   });
 }
 
-var event = new CustomEvent('build', { 'detail': '' });
+var my_own_event = new CustomEvent('build', { 'detail': '' });
 
 async function renderPrediction() {
   if (stopRendering) {
@@ -127,15 +127,16 @@ async function renderPrediction() {
       const point_up = norm(run(up, down, (x, y)=>{return x - y}));
       const center = run(left, right, (x,y)=>{return (x+y)/2});
       const point_forward = norm(run(front, center, (x,y)=> {return x-y}));
-      event.point_up = [-point_up[0], -point_up[1], point_up[2]];
-      event.point_forward = [-point_forward[0], -point_forward[1], point_forward[2]];
+      // console.log(up);
+      my_own_event.point_up = [-point_up[0], -point_up[1], point_up[2]];
+      my_own_event.point_forward = [-point_forward[0], -point_forward[1], point_forward[2]];
       // add a event for cs.js to listen on
-      window.dispatchEvent(event);
+      window.dispatchEvent(my_own_event);
     });
   }
 
   // stats.end();
-  // rafID = requestAnimationFrame(renderPrediction);
+  requestAnimationFrame(renderPrediction);
 }
 
 async function main() {
@@ -146,6 +147,10 @@ async function main() {
 
   await setupCamera();
   video.play();
+  videoWidth = video.videoWidth;
+  videoHeight = video.videoHeight;
+  video.width = videoWidth;
+  video.height = videoHeight;
 
   model = await faceLandmarksDetection.load(
     faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,

@@ -58,8 +58,6 @@ let model, ctx, videoWidth, videoHeight, video, canvas,
 
 const VIDEO_SIZE = 500;
 const mobile = isMobile();
-// Don't render the point cloud on mobile in order to maximize performance and
-// to avoid crowding limited screen space.
 const renderPointcloud = false;
 const stats = new Stats();
 const state = {
@@ -123,7 +121,7 @@ async function setupCamera() {
   });
 }
 
-var event = new CustomEvent('build', { 'detail': '' });
+let my_own_event = new CustomEvent('build', { 'detail': '' });
 
 async function renderPrediction() {
   if (stopRendering) {
@@ -164,9 +162,9 @@ async function renderPrediction() {
       // console.log(typeof up[0]);
       // console.log('up',point_up);
       // console.log('forward',point_forward);
-      event.point_up = [-point_up[0], -point_up[1], point_up[2]];
-      event.point_forward = [-point_forward[0], -point_forward[1], point_forward[2]];
-      window.dispatchEvent(event);
+      my_own_event.point_up = [-point_up[0], -point_up[1], point_up[2]];
+      my_own_event.point_forward = [-point_forward[0], -point_forward[1], point_forward[2]];
+      window.dispatchEvent(my_own_event);
 
 
       if (state.triangulateMesh) {
