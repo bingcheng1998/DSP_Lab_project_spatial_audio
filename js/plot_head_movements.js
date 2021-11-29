@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+// import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import Stats from 'stats.js';
 import {print} from "./helper";
@@ -14,14 +14,14 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setX(-20);
+camera.position.setX(0);
 camera.position.setZ(30);
 
 renderer.render(scene, camera);
 
-const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({color: 0xFF6347});
-const torus = new THREE.Mesh(geometry, material);
+// const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+// const material = new THREE.MeshStandardMaterial({color: 0xFF6347});
+// const torus = new THREE.Mesh(geometry, material);
 
 // scene.add(torus);
 
@@ -34,8 +34,8 @@ scene.add(pointLight, ambientLight);
 const lightHelper = new THREE.PointLightHelper(pointLight);
 const gridHelper = new THREE.GridHelper(200, 50);
 scene.add(lightHelper, gridHelper);
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.update();
+// const controls = new OrbitControls(camera, renderer.domElement);
+// controls.update();
 
 function addStar() {
   const geometry = new THREE.SphereGeometry(0.25, 24, 24);
@@ -70,17 +70,17 @@ new THREE.TextureLoader().load(
   }
 );
 
-const cat = require('../img/cat.webp');
-const pic = new THREE.TextureLoader().load(cat);
-
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(3,3,3),
-  new THREE.MeshBasicMaterial({map: pic})
-)
+// const cat = require('../img/cat.webp');
+// const pic = new THREE.TextureLoader().load(cat);
+//
+// const cube = new THREE.Mesh(
+//   new THREE.BoxGeometry(3,3,3),
+//   new THREE.MeshBasicMaterial({map: pic})
+// )
 
 // scene.add(cube);
 
-const glb = require('../img/nintendo_mario.glb');
+const glb = require('../img/thefuture.glb');
 let headModel;
 loader.load( glb, function ( gltf ) {
   headModel = gltf.scene;
@@ -93,18 +93,18 @@ loader.load( glb, function ( gltf ) {
 
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
-  cube.rotation.y += 0.01;
-  cube.rotation.z += 0.01;
+  // cube.rotation.y += 0.01;
+  // cube.rotation.z += 0.01;
 
   camera.position.z = 30+t * -0.1;
-  camera.position.x = -20 + t * - 0.02;
+  // camera.position.x = -20 + t * - 0.02;
   camera.position.y = t * - 0.02;
 
   camera.rotation.x =- t * -0.001;
 
-  if (headModel) {
-    headModel.rotation.y += 0.05;
-  }
+  // if (headModel) {
+  //   headModel.rotation.y += 0.05;
+  // }
 }
 document.body.onscroll = moveCamera;
 
@@ -166,8 +166,8 @@ window.addEventListener('build', function (event) {
 
     // console.log(alphas);
     headModel.rotation.x = mean(alphas);
-    headModel.rotation.y = mean(betas);
-    headModel.rotation.z = -mean(gammas);
+    headModel.rotation.y = -mean(betas);
+    headModel.rotation.z = mean(gammas);
   }
 });
 
@@ -178,7 +178,7 @@ function animate() {
   // torus.rotation.z += 0.003;
 
 
-  controls.update();
+  // controls.update();
   renderer.render(scene, camera);
   // stats.end();
   requestAnimationFrame(animate);
