@@ -215,7 +215,16 @@ function chooseAudio(id){
 
 chooseAudio('channels7'); // default
 
+function stopPlayAll() {
+  let thisButton = getEl('startPlay');
+  if (thisButton.dataset.playing === 'true') {
+    channels7.pause();
+    thisButton.dataset.playing = 'false';
+  }
+}
+
 getEl('audio1').addEventListener('click', function () {
+  stopPlayAll();
   const id = this.dataset.aim;
   audioCtx = null;
   playAll.replaceWith(playAll.cloneNode(true)); // we must use a new element
@@ -226,6 +235,7 @@ getEl('audio1').addEventListener('click', function () {
 })
 
 getEl('audio2').addEventListener('click', function () {
+  stopPlayAll();
   const id = this.dataset.aim;
   audioCtx = null;
   playAll.replaceWith(playAll.cloneNode(true)); // we must use a new element
@@ -236,10 +246,12 @@ getEl('audio2').addEventListener('click', function () {
 })
 
 getEl('audioLocal').addEventListener('click', function (){
+  stopPlayAll();
   getEl('AllowLocalFile').style.display = "block";
 })
 
 getEl("inputFile").addEventListener("change", function () {
+  stopPlayAll();
   var fileList = this.files;
   console.log(fileList);
   if (fileList.length >0) {
