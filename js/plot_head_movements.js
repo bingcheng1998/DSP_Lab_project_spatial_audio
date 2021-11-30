@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-// import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import Stats from 'stats.js';
 import {print} from "./helper";
@@ -14,7 +14,7 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setX(0);
+// camera.position.setX(0);
 camera.position.setZ(30);
 
 renderer.render(scene, camera);
@@ -25,6 +25,24 @@ renderer.render(scene, camera);
 
 // scene.add(torus);
 
+const addBall = (x, z, color) => {
+  const geometry = new THREE.SphereGeometry( 2, 32, 16 );
+  const material = new THREE.MeshStandardMaterial( { color: color } );
+  const sphere = new THREE.Mesh( geometry, material );
+  sphere.position.x = x;
+  sphere.position.z = z;
+  scene.add( sphere );
+  return sphere;
+}
+let FL = addBall(20, 23, "rgb(48,7,87)");
+let FR = addBall(-20, 23, "rgb(19,28,96)");
+let FC = addBall(0, 33.5, "rgb(101,44,14)");
+let SL = addBall(-30, 0, "rgb(13,37,96)");
+let SR = addBall(30, 0, "rgb(71,21,103)");
+let BL = addBall(-20, -20, "rgb(21,56,96)");
+let BR = addBall(20, -20, "rgb(80,29,140)");
+
+
 const pointLight = new THREE.PointLight(0xFFFFFF);
 pointLight.position.set(20,20,20);
 const ambientLight = new THREE.AmbientLight(0xFFFFFF);
@@ -34,8 +52,8 @@ scene.add(pointLight, ambientLight);
 const lightHelper = new THREE.PointLightHelper(pointLight);
 const gridHelper = new THREE.GridHelper(200, 50);
 scene.add(lightHelper, gridHelper);
-// const controls = new OrbitControls(camera, renderer.domElement);
-// controls.update();
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.update();
 
 function addStar() {
   const geometry = new THREE.SphereGeometry(0.25, 24, 24);
@@ -92,18 +110,15 @@ loader.load( glb, function ( gltf ) {
 } );
 
 const Page_height = screen.height;
+let mirror_reverse = -1;
 
 function moveCamera() {
-  // const t = document.body.getBoundingClientRect().top;
-  // camera.position.z = 30+t * -0.1;
-  // camera.position.y = t * - 0.02;
-  // camera.rotation.x =- t * -0.001;
-
   const p1 = document.getElementById('page1').getBoundingClientRect().top;
   const p2 = document.getElementById('page2').getBoundingClientRect().top;
-  // console.log(p1, p2, Page_height);
+  const p3 = document.getElementById('page3').getBoundingClientRect().top;
+  console.log(p1,p3, Page_height);
 
-  const setPosRot = (p, start, end, v1, v2, r1, r2) => {
+  const setPosRot = (p, start, end, v1, v2) => {
     // when p < start && p > end, smoothly move from v1 to v2, and rotate from r1 to r2
     if (p>start || p<end) {return;}
     // finishRate will change in [0,1]
@@ -112,29 +127,31 @@ function moveCamera() {
       return [fun(x[0], y[0]), fun(x[1], y[1]), fun(x[2], y[2])]
     }
     const v = run(v1, v2, (a, b)=>{return finishRate*b + (1-finishRate)*a});
-    const r = run(r1, r2, (a, b)=>{return finishRate*b + (1-finishRate)*a});
     camera.position.x = v[0];
     camera.position.y = v[1];
     camera.position.z = v[2];
-    camera.rotation.x = r[0];
-    camera.rotation.y = r[1];
-    camera.rotation.z = r[2];
-    // console.log('finishRate',finishRate,v, r, v1);
   }
 
   let start_pos = 1/3;
-  if (p2 >= Page_height * start_pos) {
-    setPosRot(p2, 0, -1000,
-      [0, 0, 0],[0, 0, 0],
-      [0, 0, 0],[0, 0, 0]);
-  }else if (p2 < Page_height * start_pos && p2 > 0) {
+  if (p2 > Page_height * start_pos) {
+    setPosRot(p1, 0, -100,
+      [0, 0, 30],[0, camera.position.y, 30]);
+  }else if (p2 <= Page_height * start_pos && p2 >= 0) {
     setPosRot(p2, Page_height * start_pos, 0,
-      [0, 0, 30],[0, 0, 60],
-      [0, 0, 0],[-Math.PI*1/5, 0, 0]);
-  } else if (p2 < 0) {
-    // const t = - Page_height*start_pos;
-    // camera.position.z = 30+t * -0.1;
-    // camera.position.y = t * - 0.02;
+      [0, 0, 30],[0, 60, 100]);
+  } else if (p3 > 0 && p3 < Page_height * start_pos ) {
+    if (mirror_reverse === -1){
+      setPosRot(p3, Page_height * start_pos, 0,
+        [0, 60, 100],[0, 30, 60]);
+    } else {
+      if (p3 > Page_height * start_pos/2){
+        setPosRot(p3, Page_height * start_pos, Page_height * start_pos/2,
+          [0, 60, 100],[-60, 40, 0]);
+      } else {
+        setPosRot(p3, Page_height * start_pos/2, 0,
+          [-60, 40, 0],[0, 30, -60]);
+      }
+    }
   }
 }
 document.body.onscroll = moveCamera;
@@ -173,7 +190,7 @@ let k = 0;
 const arrLen = alphas.length;
 
 let loadingExist = true;
-let mirror_reverse = -1;
+
 window.addEventListener('build', function (event) {
   if (headModel) {
     const info = document.querySelector('.info');
@@ -232,7 +249,7 @@ function animate() {
   // torus.rotation.z += 0.003;
 
 
-  // controls.update();
+  controls.update();
   renderer.render(scene, camera);
   // stats.end();
   // requestAnimationFrame(animate);
