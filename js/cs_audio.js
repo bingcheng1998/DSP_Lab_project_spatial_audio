@@ -6,6 +6,7 @@ let listener;
 let n1, n2, n3, n4, n5, n6, n7, n8;
 let analysers = [n1, n2, n3, n4, n5, n6, n7, n8];
 let music_event = new CustomEvent('music', { 'detail': '' });
+music_event.maxValues = [0,0,0,0,0,0,0,0];
 function init(audioElements) {
 
   audioCtx = new AudioContext();
@@ -148,9 +149,17 @@ function init(audioElements) {
       audioElements[i][0].style.backgroundColor = "rgb("+Math.min(255, -maxValue * 20+224)+", 225, "+
         Math.min(255, maxValue * 10+226)+")";
     }
-    music_event.maxValues = maxValues;
-    // console.log(maxValues);
-    window.dispatchEvent(music_event);
+    const arraysEqual = (a1, a2) => {
+      for (let i = 0; i < 8; i++) {
+        if (a1[i] != a2[i]) {return false;}
+      }
+      return true;
+    }
+    if (!arraysEqual(maxValues, music_event.maxValues)) {
+      music_event.maxValues = maxValues;
+      // console.log(maxValues);
+      window.dispatchEvent(music_event);
+    }
   }
   setInterval(updateWave, 50);
 
@@ -167,7 +176,7 @@ function playAudio(thisButton, audioElement) {
   }
 
   if (thisButton.dataset.playing === 'false') {
-    audioElement.play();
+    var playPromise = audioElement.play();
     thisButton.dataset.playing = 'true';
     // if track is playing pause it
   } else if (thisButton.dataset.playing === 'true') {
@@ -190,10 +199,37 @@ const a7 = [getEl('b7'), [-5, 0, 0], 1, 6]; // SL
 const a8 = [getEl('b8'), [ 5, 0, 0], 1, 7]; // SR
 const audioElements = [a1, a2, a3, a4, a5, a6, a7, a8];
 
-const channels7 = getEl('channels7');
 
-const playAll = getEl('all');
-playAll.addEventListener('click', function () {
-  playAudio(this, channels7);
-}, false)
+let playAll = getEl('startPlay');
+let channels7;
+
+function chooseAudio(id){
+  channels7 = getEl(id);
+  channels7.replaceWith(channels7.cloneNode(true));
+  channels7 = getEl(id);
+  playAll.addEventListener('click', function () {
+    console.log('id', id);
+    playAudio(this, channels7);
+  }, false)
+}
+
+chooseAudio('channels7'); // default
+
+document.getElementById('audio1').addEventListener('click', function () {
+  const id = this.dataset.aim;
+  audioCtx = null;
+  playAll.replaceWith(playAll.cloneNode(true));
+  playAll = getEl('startPlay');
+  console.log(id);
+  chooseAudio(id);
+})
+
+document.getElementById('audio2').addEventListener('click', function () {
+  const id = this.dataset.aim;
+  audioCtx = null;
+  playAll.replaceWith(playAll.cloneNode(true));
+  playAll = getEl('startPlay');
+  console.log(id);
+  chooseAudio(id);
+})
 

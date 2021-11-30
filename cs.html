@@ -58,10 +58,10 @@
       <p>If everything works well, you can start your tour in the spatial audio world!</p>
       <p>home<a href="./"> home</a>
       <div style="text-align:center; width: 100%;">
-      <i class="large icons">
-        <i class="inverted big circle outline icon"></i>
-        <i class="inverted large angle double down icon"></i>
-      </i></div>
+        <i class="large icons">
+          <i class="inverted big circle outline icon"></i>
+          <i class="inverted large angle double down icon"></i>
+        </i></div>
     </div>
 
 
@@ -73,7 +73,30 @@
       <div class="ui toggle checkbox">
         <input type="checkbox" checked="checked" id="mirror">
         <label>-</label>
-      </div>Mirror Mode
+      </div>Mirror Mode<p></p>
+      <div class="ui inverted form">
+        <div class="grouped fields">
+          <h3>Choose the audio source to play:</h3>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" id="audio1" checked="checked" name="musicChosen" data-aim="channels7">
+              <label>7.1 channel test audio</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" id="audio2" name="musicChosen" data-aim="sweetBoy">
+              <label>dear child</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" id="audio3" name="musicChosen" data-aim="aim3">
+              <label>Once a day</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -90,7 +113,7 @@
 
       <h1>Player Control</h1>
       <div align="center">
-        <button data-playing="false" id="all" class="controls-play ui toggle labeled icon button" role="switch" aria-checked="false">
+        <button data-playing="false" id="startPlay" class="controls-play ui toggle labeled icon button" role="switch" aria-checked="false">
           <i class="play icon"></i>
           <span>Start</span>
         </button></div>
@@ -100,77 +123,68 @@
         <div class="column">
           <div class="ui segment">
             <button data-playing="false" id="b1" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-            <i class="bell icon"></i>
-            <span>Front Left</span>
-          </button>
+              <i class="bell icon"></i>
+              <span>Front Left</span>
+            </button>
           </div>
         </div>
         <div class="column">
           <div class="ui segment">
             <button data-playing="false" id="b2" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-            <i class="bell icon"></i>
-            <span>Front Right</span>
-          </button>
+              <i class="bell icon"></i>
+              <span>Front Right</span>
+            </button>
           </div>
         </div>
         <div class="column">
           <div class="ui segment">
-          <button data-playing="false" id="b3" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-            <i class="bell icon"></i>
-            <span>Center</span>
-          </button>
+            <button data-playing="false" id="b3" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Center</span>
+            </button>
           </div>
         </div>
         <div class="column">
           <div class="ui segment">
             <button data-playing="false" id="b4" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-            <i class="bell icon slash"></i>
-            <span>Low Freq </span>
-          </button>
+              <i class="bell icon slash"></i>
+              <span>Low Freq </span>
+            </button>
           </div>
         </div>
         <div class="column">
           <div class="ui segment">
             <button data-playing="false" id="b5" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-            <i class="bell icon"></i>
-            <span>Back Left</span>
-          </button>
+              <i class="bell icon"></i>
+              <span>Back Left</span>
+            </button>
           </div>
         </div>
         <div class="column">
           <div class="ui segment">
             <button data-playing="false" id="b6" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-            <i class="bell icon"></i>
-            <span>Back Right</span>
-          </button>
+              <i class="bell icon"></i>
+              <span>Back Right</span>
+            </button>
           </div>
         </div>
         <div class="column">
           <div class="ui segment">
             <button data-playing="false" id="b7" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-            <i class="bell icon"></i>
-            <span>Left Surr</span>
-          </button>
+              <i class="bell icon"></i>
+              <span>Left Surr</span>
+            </button>
           </div>
         </div>
         <div class="column">
           <div class="ui segment">
-           <button data-playing="false" id="b8" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-            <i class="bell icon"></i>
-            <span>Right Surr</span>
-          </button>
+            <button data-playing="false" id="b8" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Right Surr</span>
+            </button>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
     </div>
   </div>
 
@@ -181,12 +195,10 @@
 
 </main>
 
-<!--<audio id="a1" src="/assets/human.wav" crossorigin="" loop></audio>-->
-<!--<audio id="a2" src="/assets/guitar.wav" crossorigin="" loop></audio>-->
-<!--<audio id="a3" src="/assets/drums.wav" crossori
-gin="" loop></audio>-->
+<audio preload="none"  id="channels7" src="/assets/TestHuman7.1.wav" crossorigin="" loop></audio>
+<audio preload="none"  id="sweetBoy" src="/assets/05.亲爱的小孩.wav" crossorigin="" loop></audio>
 
-<audio id="channels7" src="/assets/TestHuman7.1.wav" crossorigin="" loop></audio>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
 <script src="/js/cs_face_orientation.js"></script>

@@ -34,8 +34,8 @@ const addBall = (x, z, color) => {
   scene.add( sphere );
   return sphere;
 }
-let FL = addBall(20, 23, "rgb(48,7,87)");
-let FR = addBall(-20, 23, "rgb(19,28,96)");
+let FL = addBall(-20, 23, "rgb(48,7,87)");
+let FR = addBall(20, 23, "rgb(19,28,96)");
 let FC = addBall(0, 33.5, "rgb(101,44,14)");
 let LFE = addBall(0, 0, "rgb(152,234,52)");
 let BL = addBall(-20, -20, "rgb(21,56,96)");
@@ -57,11 +57,13 @@ window.addEventListener('music', function (event) {
   console.log('maxValues', maxValues, initBallsColor[0]);
   for (let i = 0; i < 8; i ++) {
     let ball = balls[i];
-    let value = maxValues[i];
+    let value = Math.min(maxValues[i], 30)/10 + 1.0;
     let r = initBallsColor[i].r;
     let g = initBallsColor[i].g;
     let b = initBallsColor[i].b;
-    ball.material.color.r = r + value/20;
+    ball.material.color.r = r * value;
+    ball.material.color.g = g * value;
+    ball.material.color.b = b * value;
   }
 })
 
@@ -139,7 +141,7 @@ function moveCamera() {
   const p1 = document.getElementById('page1').getBoundingClientRect().top;
   const p2 = document.getElementById('page2').getBoundingClientRect().top;
   const p3 = document.getElementById('page3').getBoundingClientRect().top;
-  console.log(p1,p3, Page_height);
+  // console.log(p1,p3, Page_height);
 
   const setPosRot = (p, start, end, v1, v2) => {
     // when p < start && p > end, smoothly move from v1 to v2, and rotate from r1 to r2
@@ -257,8 +259,14 @@ function mirrorSet(value) {
   console.log('chacked?', value);
   if(value) {
     mirror_reverse = -1;
+    for (let ball of balls) {
+      ball.position.x = -ball.position.x;
+    }
   } else {
     mirror_reverse = 1;
+    for (let ball of balls) {
+      ball.position.x = -ball.position.x;
+    }
   }
 }
 document.getElementById('mirror').addEventListener('click', function (){
