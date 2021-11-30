@@ -103,17 +103,38 @@ function moveCamera() {
   const p2 = document.getElementById('page2').getBoundingClientRect().top;
   // console.log(p1, p2, Page_height);
 
-  if (p1>-Page_height/5) {
-  }else if (p2 < Page_height/5 && p2 > 0) {
-      const t = - Page_height/5 + p2;
-      camera.position.z = 30+t * -0.1;
-      camera.position.y = t * - 0.02;
-      camera.rotation.x =- t * -0.001;
+  const setPosRot = (p, start, end, v1, v2, r1, r2) => {
+    // when p < start && p > end, smoothly move from v1 to v2, and rotate from r1 to r2
+    if (p>start || p<end) {return;}
+    // finishRate will change in [0,1]
+    const finishRate = (start - p)/(start - end);
+    const run = (x, y, fun) => {
+      return [fun(x[0], y[0]), fun(x[1], y[1]), fun(x[2], y[2])]
+    }
+    const v = run(v1, v2, (a, b)=>{return finishRate*b + (1-finishRate)*a});
+    const r = run(r1, r2, (a, b)=>{return finishRate*b + (1-finishRate)*a});
+    camera.position.x = v[0];
+    camera.position.y = v[1];
+    camera.position.z = v[2];
+    camera.rotation.x = r[0];
+    camera.rotation.y = r[1];
+    camera.rotation.z = r[2];
+    // console.log('finishRate',finishRate,v, r, v1);
+  }
+
+  let start_pos = 1/3;
+  if (p2 >= Page_height * start_pos) {
+    setPosRot(p2, 0, -1000,
+      [0, 0, 0],[0, 0, 0],
+      [0, 0, 0],[0, 0, 0]);
+  }else if (p2 < Page_height * start_pos && p2 > 0) {
+    setPosRot(p2, Page_height * start_pos, 0,
+      [0, 0, 30],[0, 0, 60],
+      [0, 0, 0],[-Math.PI*1/5, 0, 0]);
   } else if (p2 < 0) {
-    const t = - Page_height/5;
-    camera.position.z = 30+t * -0.1;
-    camera.position.y = t * - 0.02;
-    camera.rotation.x =- t * -0.001;
+    // const t = - Page_height*start_pos;
+    // camera.position.z = 30+t * -0.1;
+    // camera.position.y = t * - 0.02;
   }
 }
 document.body.onscroll = moveCamera;

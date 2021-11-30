@@ -15,6 +15,14 @@ main {
   /*grid-template-columns: repeat(6, 1fr);*/
 }
 
+smallMargin {
+
+}
+
+container {
+  width: 100%;
+}
+
 h1, h2, h3, blockquote {
   font-family: elevon, sans-serif;
   font-weight: 700;
@@ -49,4 +57,18 @@ section {
 
 .ui.toggle.checkbox label .ui.toggle.checkbox input:checked~.box, .ui.toggle.checkbox input:checked~label{
   color: #00B5AD;
+}
+
+.ui.segment {
+  position: relative;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 1px 2px 0 rgb(34 36 38 / 15%);
+  margin: 0rem 0;
+  padding: 0em 0em;
+  border: 0px;
+}
+
+.ui.grid>.column:not(.row) {
+  padding-top: 1rem;
+  padding-bottom: 0rem;
 }

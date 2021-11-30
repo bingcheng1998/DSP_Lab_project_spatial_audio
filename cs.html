@@ -8,15 +8,15 @@
   <link rel="icon" href="icon.png" type="image/x-icon">
   <link rel="shortcut icon" href="icon.png" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
-<!--  <link rel="stylesheet" href="css/orientation.css">-->
+  <!--  <link rel="stylesheet" href="css/orientation.css">-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/main.css">
-<!--  <link rel="stylesheet" href="css/web-cam.css">-->
+  <!--  <link rel="stylesheet" href="css/web-cam.css">-->
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
-<!--  <link rel="stylesheet" href="css/desktop-app.css">-->
+  <!--  <link rel="stylesheet" href="css/desktop-app.css">-->
   <link rel="stylesheet" type="text/css" href="css/style.css">
-<!--  <script src="https://cdn.jsdelivr.net/npm/three@0.106.2/build/three.min.js"></script>-->
-<!--  <script src="https://cdn.jsdelivr.net/npm/scatter-gl@0.0.1/lib/scatter-gl.min.js"></script>-->
+  <!--  <script src="https://cdn.jsdelivr.net/npm/three@0.106.2/build/three.min.js"></script>-->
+  <!--  <script src="https://cdn.jsdelivr.net/npm/scatter-gl@0.0.1/lib/scatter-gl.min.js"></script>-->
   <style>
     .loader {
       position: absolute;
@@ -53,94 +53,132 @@
 <main>
   <div class="full_height ui container" id="page1" style="position:relative;">
     <h1 style="font-size: 80px;">Spatial Audio</h1>
-    <div style='position: absolute;bottom: 0;left: 5vw;margin-bottom: 10vh;'>
+
+    <div style='position: absolute;bottom: 0;left:0;margin-bottom: 10vh; width: 100%;'>
       <p>If everything works well, you can start your tour in the spatial audio world!</p>
       <p>home<a href="./"> home</a>
+      <div style="text-align:center; width: 100%;">
+      <i class="large icons">
+        <i class="inverted big circle outline icon"></i>
+        <i class="inverted large angle double down icon"></i>
+      </i></div>
     </div>
 
+
   </div>
 
-  <div class="full_height ui container" id="page2">
-    <h1>Mode Setting</h1>
-    <div class="ui toggle checkbox">
-      <input type="checkbox" checked="checked" id="mirror">
-      <label>-</label>
-    </div>Mirror Mode
+  <div class="full_height ui container" id="page2" style="position:relative;">
+    <div style='position: absolute;bottom: 0;left: 5vw;margin-bottom: 10vh;'>
+      <h1>Mode Setting</h1>
+      <div class="ui toggle checkbox">
+        <input type="checkbox" checked="checked" id="mirror">
+        <label>-</label>
+      </div>Mirror Mode
+    </div>
   </div>
 
-  <div class="full_height ui container" id="page3">
+  <div class="full_height ui container" id="page3" style="position:relative;">
     <div id="stats" class="stats"></div>
-
-<!--    <div class="canvas-wrapper">-->
-<!--      <canvas id="output" width="500" height="500" style="border:1px solid"></canvas>-->
-<!--    </div>-->
-
     <video id="video" playsinline="" style="
           -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
-          /*visibility: hidden;*/
           display:none;
           ">
     </video>
 
+    <div style='position: absolute;bottom: 0;left: 0vw;margin-bottom: 0vh;'>
+
+      <h1>Player Control</h1>
+      <div align="center">
+        <button data-playing="false" id="all" class="controls-play ui toggle labeled icon button" role="switch" aria-checked="false">
+          <i class="play icon"></i>
+          <span>Start</span>
+        </button></div>
+      </p>
+
+      <div class="ui four column doubling grid container" style="text-align: center">
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b1" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+            <i class="bell icon"></i>
+            <span>Front Left</span>
+          </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b2" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+            <i class="bell icon"></i>
+            <span>Front Right</span>
+          </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+          <button data-playing="false" id="b3" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+            <i class="bell icon"></i>
+            <span>Center</span>
+          </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b4" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+            <i class="bell icon slash"></i>
+            <span>Low Freq </span>
+          </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b5" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+            <i class="bell icon"></i>
+            <span>Back Left</span>
+          </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b6" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+            <i class="bell icon"></i>
+            <span>Back Right</span>
+          </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b7" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+            <i class="bell icon"></i>
+            <span>Left Surr</span>
+          </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+           <button data-playing="false" id="b8" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+            <i class="bell icon"></i>
+            <span>Right Surr</span>
+          </button>
+          </div>
+        </div>
+      </div>
 
 
-    <p>
-    <div align="center">
-      <button data-playing="false" id="all" class="controls-play ui toggle labeled icon button" role="switch" aria-checked="false">
-        <i class="play icon"></i>
-        <span>Start</span>
-      </button></div>
-    </p>
 
 
-    </p>
-    1. <button data-playing="false" id="b1" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-    <i class="bell icon"></i>
-    <span> FL: Front Left</span>
-  </button>
-    </p>
-    2. <button data-playing="false" id="b2" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-    <i class="bell icon"></i>
-    <span> FR: Front Right</span>
-  </button>
-    </p>
-    3. <button data-playing="false" id="b3" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-    <i class="bell icon"></i>
-    <span> C: Front Center</span>
-  </button>
-    </p>
-    4. <button data-playing="false" id="b4" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-    <i class="bell icon slash"></i>
-    <span> LFE: Low Frequency </span>
-  </button>If you listen small cracks, please mute this channel.
-    </p>
-    5. <button data-playing="false" id="b5" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-    <i class="bell icon"></i>
-    <span>BL: Back Left</span>
-  </button>
-    </p>
-    6. <button data-playing="false" id="b6" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-    <i class="bell icon"></i>
-    <span>BR: Back Right</span>
-  </button>
-    </p>
-    7. <button data-playing="false" id="b7" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-    <i class="bell icon"></i>
-    <span>SL: Side Left Surround</span>
-  </button>
-    </p>
-    8. <button data-playing="false" id="b8" class="controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
-    <i class="bell icon"></i>
-    <span>SR: Side Right Surround</span>
-  </button>
-    </p>
-    And it's ok to open only one of them to focus on one channel.
-    </p>
-    Now, you are all set! Turn your head left and right to experience spatial audio!
-    </p>
+
+
+
+
+
+    </div>
+  </div>
+
+
+  <div class="full_height ui container" id="page4" style="position:relative;">
     <pre class="info"></pre>
   </div>
+
 </main>
 
 <!--<audio id="a1" src="/assets/human.wav" crossorigin="" loop></audio>-->
