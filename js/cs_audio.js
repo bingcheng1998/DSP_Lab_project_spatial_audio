@@ -5,7 +5,7 @@ let audioCtx;
 let listener;
 let n1, n2, n3, n4, n5, n6, n7, n8;
 let analysers = [n1, n2, n3, n4, n5, n6, n7, n8];
-
+let music_event = new CustomEvent('music', { 'detail': '' });
 function init(audioElements) {
 
   audioCtx = new AudioContext();
@@ -148,7 +148,9 @@ function init(audioElements) {
       audioElements[i][0].style.backgroundColor = "rgb("+Math.min(255, -maxValue * 20+224)+", 225, "+
         Math.min(255, maxValue * 10+226)+")";
     }
+    music_event.maxValues = maxValues;
     // console.log(maxValues);
+    window.dispatchEvent(music_event);
   }
   setInterval(updateWave, 50);
 

@@ -37,10 +37,33 @@ const addBall = (x, z, color) => {
 let FL = addBall(20, 23, "rgb(48,7,87)");
 let FR = addBall(-20, 23, "rgb(19,28,96)");
 let FC = addBall(0, 33.5, "rgb(101,44,14)");
-let SL = addBall(-30, 0, "rgb(13,37,96)");
-let SR = addBall(30, 0, "rgb(71,21,103)");
+let LFE = addBall(0, 0, "rgb(152,234,52)");
 let BL = addBall(-20, -20, "rgb(21,56,96)");
 let BR = addBall(20, -20, "rgb(80,29,140)");
+let SL = addBall(-30, 0, "rgb(13,37,96)");
+let SR = addBall(30, 0, "rgb(71,21,103)");
+let balls = [FL, FR, FC, LFE, BL, BR, SL, SR];
+let getInitBallsColor = () =>{
+  let colors = [];
+  for (let ball of balls) {
+    colors.push(new THREE.Color(ball.material.color));
+  }
+  return colors;
+}
+const initBallsColor = getInitBallsColor();
+
+window.addEventListener('music', function (event) {
+  let maxValues = event.maxValues;
+  console.log('maxValues', maxValues, initBallsColor[0]);
+  for (let i = 0; i < 8; i ++) {
+    let ball = balls[i];
+    let value = maxValues[i];
+    let r = initBallsColor[i].r;
+    let g = initBallsColor[i].g;
+    let b = initBallsColor[i].b;
+    ball.material.color.r = r + value/20;
+  }
+})
 
 
 const pointLight = new THREE.PointLight(0xFFFFFF);
