@@ -72,3 +72,72 @@ section {
   padding-top: 1rem;
   padding-bottom: 0rem;
 }
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #3d3d3d;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 70vw;
+  background-color: rgba(38, 38, 38, 0.49);
+  color: #d2d2d2;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -35vw;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  /*left: 50%;*/
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #383838 transparent transparent transparent;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.big3DText {
+  position: relative;
+  top: 14%;
+  right: 50%;
+  transform: translate(50%,-50%);
+  text-transform: uppercase;
+  font-family: verdana;
+  font-size: 4em;
+  font-weight: 700;
+  color: #f5f5f5;
+  text-shadow: 1px 1px 1px #919191,
+  1px 2px 1px #919191,
+  1px 3px 1px #919191,
+  1px 4px 1px #919191,
+  1px 5px 1px #919191,
+  1px 6px 1px #919191,
+  1px 7px 1px #919191,
+  1px 8px 1px #919191,
+  1px 9px 1px #919191,
+  1px 10px 1px #919191,
+  1px 18px 6px rgba(16,16,16,0.4),
+  1px 22px 10px rgba(16,16,16,0.2),
+  1px 25px 35px rgba(16,16,16,0.2),
+  1px 30px 60px rgba(16,16,16,0.4);
+}

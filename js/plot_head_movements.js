@@ -113,15 +113,6 @@ new THREE.TextureLoader().load(
   }
 );
 
-// const cat = require('../img/cat.webp');
-// const pic = new THREE.TextureLoader().load(cat);
-//
-// const cube = new THREE.Mesh(
-//   new THREE.BoxGeometry(3,3,3),
-//   new THREE.MeshBasicMaterial({map: pic})
-// )
-
-// scene.add(cube);
 
 const glb = require('../img/thefuture.glb');
 let headModel;
@@ -141,6 +132,7 @@ function moveCamera() {
   const p1 = document.getElementById('page1').getBoundingClientRect().top;
   const p2 = document.getElementById('page2').getBoundingClientRect().top;
   const p3 = document.getElementById('page3').getBoundingClientRect().top;
+  const p4 = document.getElementById('page4').getBoundingClientRect().top;
   // console.log(p1,p3, Page_height);
 
   const setPosRot = (p, start, end, v1, v2) => {
@@ -159,22 +151,56 @@ function moveCamera() {
 
   let start_pos = 1/3;
   if (p2 > Page_height * start_pos) {
+    // Scroll on page 1
     setPosRot(p1, 0, -100,
       [0, 0, 30],[0, camera.position.y, 30]);
   }else if (p2 <= Page_height * start_pos && p2 >= 0) {
+    // Scroll to faraway on page 2
     setPosRot(p2, Page_height * start_pos, 0,
       [0, 0, 30],[0, 60, 100]);
   } else if (p3 > 0 && p3 < Page_height * start_pos ) {
+    // Scroll according to setting in (mirror) on page 3
     if (mirror_reverse === -1){
-      setPosRot(p3, Page_height * start_pos, 0,
-        [0, 60, 100],[0, 30, 60]);
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        setPosRot(p3, Page_height * start_pos, 0,
+          [0, 60, 100],[0, 35, 80]);
+      } else {
+        setPosRot(p3, Page_height * start_pos, 0,
+          [0, 60, 100],[0, 15, 45]);
+      }
+
     } else {
+      // if no mirror setting, we need to transpose the camera to the back
       if (p3 > Page_height * start_pos/2){
         setPosRot(p3, Page_height * start_pos, Page_height * start_pos/2,
           [0, 60, 100],[-60, 40, 0]);
       } else {
-        setPosRot(p3, Page_height * start_pos/2, 0,
-          [-60, 40, 0],[0, 30, -60]);
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+          setPosRot(p3, Page_height * start_pos/2, 0,
+            [-60, 40, 0],[0, 35, -80]);
+        } else {
+          setPosRot(p3, Page_height * start_pos/2, 0,
+            [-60, 40, 0],[0, 25, -45]);
+        }
+
+      }
+    }
+  } else if (p3 < 0) {
+    if (mirror_reverse === -1){
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        setPosRot(p3, 0, -Page_height,
+          [0, 35, 80],[0, 35, 80]);
+      } else {
+        setPosRot(p3, 0, -Page_height,
+          [0, 15, 45],[0, 15, 45]);
+      }
+    } else {
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        setPosRot(p3, 0, -Page_height,
+          [0, 35, -80],[0, 35, -80]);
+      } else {
+        setPosRot(p3, 0, -Page_height,
+          [0, 25, -45],[0, 25, -45]);
       }
     }
   }
@@ -221,8 +247,8 @@ window.addEventListener('build', function (event) {
     const info = document.querySelector('.info');
     let global_up = event.point_up;
     let global_forward = event.point_forward;
-    info.textContent = print(['u: x','y','z'],global_up);
-    info.textContent += print(['f: x','y','z'],global_forward);
+    // info.textContent = print(['u: x','y','z'],global_up);
+    // info.textContent += print(['f: x','y','z'],global_forward);
 
     let z = global_forward;
     z = [-z[0], z[1], -z[2]];
@@ -230,12 +256,12 @@ window.addEventListener('build', function (event) {
     // cross multiply: Z = X x Y
     let x = [y[1]*z[2]-y[2]*z[1], y[2]*z[0]-y[0]*z[2], y[0]*z[1]-y[1]*z[0]];
     x = norm(x);
-    info.textContent += print(['x: x','y','z'],x);
+    // info.textContent += print(['x: x','y','z'],x);
     // then clculate Eular angle as described in https://en.wikipedia.org/wiki/Euler_angles:
     let alpha = Math.atan(-z[1]/z[2]);
     let beta = Math.atan(z[0]/Math.sqrt(1 - z[0]*z[0]));
     let gamma = Math.atan(-y[0]/x[0]);
-    info.textContent += print(['r: a','b','r'],[alpha, beta, gamma]);
+    // info.textContent += print(['r: a','b','r'],[alpha, beta, gamma]);
 
     alphas[k] = alpha;
     gammas[k] = gamma;

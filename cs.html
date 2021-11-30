@@ -12,6 +12,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <!--  <link rel="stylesheet" href="css/web-cam.css">-->
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
   <!--  <link rel="stylesheet" href="css/desktop-app.css">-->
   <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -52,7 +56,7 @@
 
 <main>
   <div class="full_height ui container" id="page1" style="position:relative;">
-    <h1 style="font-size: 80px;">Spatial Audio</h1>
+    <h2 style="font-size: 80px;" class="big3DText">Spatial Audio</h2>
 
     <div style='position: absolute;bottom: 10vh;left:5vw;right:5vw;margin-bottom: 10vh; width: 100%;'>
       <p>Here is a virtual but warm greeting from <a href="https://bingcheng.openmc.cn">Bingcheng</a>, and hope you can enjoy this
@@ -64,7 +68,7 @@
     <div style='position: absolute;bottom: 0;left:0;margin-bottom: 10vh; width: 100%;'>
       <div style="text-align:center; width: 100%;">
         <i class="large icons">
-<!--          <i class="inverted big circle outline icon"></i>-->
+          <!--          <i class="inverted big circle outline icon"></i>-->
           <i class="inverted large angle double down icon"></i>
         </i></div>
     </div>
@@ -76,7 +80,7 @@
     <div style='position: absolute;bottom: 0;left: 0vw;margin-bottom: 10vh;width: 100%;'>
       <div style="text-align:center; width: 100%;">
         <i class="large icons">
-<!--          <i class="inverted big circle outline icon"></i>-->
+          <!--          <i class="inverted big circle outline icon"></i>-->
           <i class="inverted large angle double down icon"></i>
         </i></div>
     </div>
@@ -111,7 +115,9 @@
       </div>
       <div id="AllowLocalFile" style="display: none">
         <h4>Upload your own audio file (Optional):</h4>
-        <input type="file" id="inputFile">
+        <p>Up to 7.1 channels are allowed; Stereo audio files can be used,
+          but for the best experience, it is best to choose 5.1 or 7.1 channel audio.</p>
+        <input type="file" id="inputFile" accept="audio/*">
       </div>
 
     </div>
@@ -207,7 +213,25 @@
 
 
   <div class="full_height ui container" id="page4" style="position:relative;">
-    <pre class="info"></pre>
+    <div style='position: absolute;bottom: 5vh;left: 0vw;margin-bottom: 0vh; width: 100%;text-align: center'>
+      <div class="ui divider"></div>
+      <div class="tooltip">
+        <div style="color: #175b7c">Acknowledgment</div>
+        <span class="tooltiptext">
+          <div class="ui bulleted list" style="text-align: left; margin-left: 5vw">
+            <div class="item">This is a course project for DSP Lab, NYU. Instructed by Prof. Selesnick.</div>
+            <div class="item">Inside construction of Apple's Airpods pro: <a href="https://www.youtube.com/watch?v=3vY3wuE7WVU">YouTube</a></div>
+            <div class="item">3D human head model: <a href="https://skfb.ly/6YUEu">Sketchfab</a> </div>
+            <div class="item">Multichannel 7.1 and 5.1 Wav Test Files: <a href="https://www.jensign.com/bdp95/7dot1voiced/index.html">jensign.com</a> </div>
+            <div class="item">7.1 surround sound: <a href="https://en.wikipedia.org/wiki/7.1_surround_sound">wikipedia</a> </div>
+            <div class="item">Spatial Audio Slides: <a href="https://brightspace.nyu.edu/d2l/le/lessons/113891/topics/5203695">NYU BrightSpace</a> </div>
+            <div class="item">Web audio spatialization basics: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Web_audio_spatialization_basics">Moz://a</a> </div>
+<!--            <div class="item">Inviting Friends</div>-->
+          </div>
+        </span>
+      </div>
+      <div style="font-size: 0.5rem; color: #838383">OmniAI.org</div>
+    </div>
   </div>
 
 </main>
