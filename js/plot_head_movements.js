@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import Stats from 'stats.js';
+// import Stats from 'stats.js';
 import {print} from "./helper";
 
 const scene = new THREE.Scene();
@@ -207,9 +207,9 @@ function moveCamera() {
 }
 document.body.onscroll = moveCamera;
 
-const stats = new Stats();
-stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.getElementById('stats').appendChild(stats.dom);
+// const stats = new Stats();
+// stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+// document.getElementById('stats').appendChild(stats.dom);
 
 function removeElementsByClass(className){
   const elements = document.getElementsByClassName(className);
@@ -300,20 +300,14 @@ document.getElementById('mirror').addEventListener('click', function (){
 });
 
 function animate() {
-  stats.begin();
-  // torus.rotation.x += 0.01;
-  // torus.rotation.y += 0.005;
-  // torus.rotation.z += 0.003;
-
-
+  // stats.begin();
   controls.update();
   renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+  // setTimeout( function() {
+  //   requestAnimationFrame( animate );
+  // }, 1000 / 24 );
   // stats.end();
-  // requestAnimationFrame(animate);
-  setTimeout( function() {
-    requestAnimationFrame( animate );
-  }, 1000 / 24 );
-  stats.end();
 }
 requestAnimationFrame( animate );
 

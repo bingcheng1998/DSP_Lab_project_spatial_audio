@@ -122,7 +122,7 @@ function init(audioElements) {
     playElement.addEventListener('click', function() {
       if (gainNode.gain.value === 0) {
         playElement.children[0].classList.remove("slash");
-        gainNode.gain.value = gain;
+        gainNode.gain.value = 1;
       } else {
         playElement.children[0].classList.add("slash");
         gainNode.gain.value = 0;
@@ -151,7 +151,7 @@ function init(audioElements) {
     }
     const arraysEqual = (a1, a2) => {
       for (let i = 0; i < 8; i++) {
-        if (a1[i] != a2[i]) {return false;}
+        if (a1[i] !== a2[i]) {return false;}
       }
       return true;
     }
@@ -162,7 +162,6 @@ function init(audioElements) {
     }
   }
   setInterval(updateWave, 50);
-
 }
 
 
@@ -178,10 +177,12 @@ function playAudio(thisButton, audioElement) {
   if (thisButton.dataset.playing === 'false') {
     var playPromise = audioElement.play();
     thisButton.dataset.playing = 'true';
+    getEl('startPlay').style.backgroundColor = 'rgb(54,146,220)';
     // if track is playing pause it
   } else if (thisButton.dataset.playing === 'true') {
     audioElement.pause();
     thisButton.dataset.playing = 'false';
+    getEl('startPlay').style.backgroundColor = 'rgb(225,226,226)';
   }
 
   let state = thisButton.getAttribute('aria-checked') === "true";
@@ -220,6 +221,7 @@ function stopPlayAll() {
   if (thisButton.dataset.playing === 'true') {
     channels7.pause();
     thisButton.dataset.playing = 'false';
+    getEl('startPlay').style.backgroundColor = 'rgb(225,226,226)';
   }
 }
 
