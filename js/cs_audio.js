@@ -205,7 +205,7 @@ let channels7;
 
 function chooseAudio(id){
   channels7 = getEl(id);
-  channels7.replaceWith(channels7.cloneNode(true));
+  channels7.replaceWith(channels7.cloneNode(true)); // we must use a new element
   channels7 = getEl(id);
   playAll.addEventListener('click', function () {
     console.log('id', id);
@@ -215,21 +215,43 @@ function chooseAudio(id){
 
 chooseAudio('channels7'); // default
 
-document.getElementById('audio1').addEventListener('click', function () {
+getEl('audio1').addEventListener('click', function () {
   const id = this.dataset.aim;
   audioCtx = null;
-  playAll.replaceWith(playAll.cloneNode(true));
+  playAll.replaceWith(playAll.cloneNode(true)); // we must use a new element
   playAll = getEl('startPlay');
   console.log(id);
   chooseAudio(id);
+  getEl('AllowLocalFile').style.display = "none";
 })
 
-document.getElementById('audio2').addEventListener('click', function () {
+getEl('audio2').addEventListener('click', function () {
   const id = this.dataset.aim;
   audioCtx = null;
-  playAll.replaceWith(playAll.cloneNode(true));
+  playAll.replaceWith(playAll.cloneNode(true)); // we must use a new element
   playAll = getEl('startPlay');
   console.log(id);
   chooseAudio(id);
+  getEl('AllowLocalFile').style.display = "none";
 })
 
+getEl('audioLocal').addEventListener('click', function (){
+  getEl('AllowLocalFile').style.display = "block";
+})
+
+getEl("inputFile").addEventListener("change", function () {
+  var fileList = this.files;
+  console.log(fileList);
+  if (fileList.length >0) {
+    audioCtx = null;
+    playAll.replaceWith(playAll.cloneNode(true)); // we must use a new element
+    playAll = getEl('startPlay');
+    let url = window.URL.createObjectURL(fileList[0]);
+    getEl('aimLocalAudio').src = url;
+    channels7 = getEl('aimLocalAudio');
+    playAll.addEventListener('click', function () {
+      console.log('url', url);
+      playAudio(this, channels7);
+    }, false)
+  }
+}, false);

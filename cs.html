@@ -68,7 +68,14 @@
   </div>
 
   <div class="full_height ui container" id="page2" style="position:relative;">
-    <div style='position: absolute;bottom: 0;left: 5vw;margin-bottom: 10vh;'>
+    <div style='position: absolute;bottom: 0;left: 0vw;margin-bottom: 10vh;width: 100%;'>
+      <div style="text-align:center; width: 100%;">
+        <i class="large icons">
+          <i class="inverted big circle outline icon"></i>
+          <i class="inverted large angle double down icon"></i>
+        </i></div>
+    </div>
+    <div style='position: absolute;bottom: 30%;left: 5vw;margin-bottom: 10vh;'>
       <h1>Mode Setting</h1>
       <div class="ui toggle checkbox">
         <input type="checkbox" checked="checked" id="mirror">
@@ -91,12 +98,17 @@
           </div>
           <div class="field">
             <div class="ui radio checkbox">
-              <input type="radio" id="audio3" name="musicChosen" data-aim="aim3">
-              <label>Once a day</label>
+              <input type="radio" id="audioLocal" name="musicChosen" data-aim="aimLocalAudio">
+              <label>Local audio file</label>
             </div>
           </div>
         </div>
       </div>
+      <div id="AllowLocalFile" style="display: none">
+        <h4>Upload your own audio file (Optional):</h4>
+        <input type="file" id="inputFile">
+      </div>
+
     </div>
   </div>
 
@@ -197,6 +209,7 @@
 
 <audio preload="none"  id="channels7" src="/assets/TestHuman7.1.wav" crossorigin="" loop></audio>
 <audio preload="none"  id="sweetBoy" src="/assets/05.亲爱的小孩.wav" crossorigin="" loop></audio>
+<audio preload="none"  id="aimLocalAudio" crossorigin="" loop></audio>
 
 
 
