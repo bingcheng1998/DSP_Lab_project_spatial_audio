@@ -116,7 +116,7 @@ function init(audioElements) {
     let order = audioPack[3];
     analysers[order] = audioCtx.createAnalyser();
     // let analyser = analysers[order];
-    console.log(pos);
+    // console.log(pos);
     const gainNode = audioCtx.createGain();
     gainNode.gain.value = gain;
     playElement.addEventListener('click', function() {
@@ -209,7 +209,7 @@ function chooseAudio(id){
   channels7.replaceWith(channels7.cloneNode(true)); // we must use a new element
   channels7 = getEl(id);
   playAll.addEventListener('click', function () {
-    console.log('id', id);
+    // console.log('id', id);
     playAudio(this, channels7);
   }, false)
 }
@@ -231,7 +231,7 @@ getEl('audio1').addEventListener('click', function () {
   audioCtx = null;
   playAll.replaceWith(playAll.cloneNode(true)); // we must use a new element
   playAll = getEl('startPlay');
-  console.log(id);
+  // console.log(id);
   chooseAudio(id);
   getEl('AllowLocalFile').style.display = "none";
 })
@@ -242,7 +242,7 @@ getEl('audio2').addEventListener('click', function () {
   audioCtx = null;
   playAll.replaceWith(playAll.cloneNode(true)); // we must use a new element
   playAll = getEl('startPlay');
-  console.log(id);
+  // console.log(id);
   chooseAudio(id);
   getEl('AllowLocalFile').style.display = "none";
 })
@@ -255,7 +255,7 @@ getEl('audioLocal').addEventListener('click', function (){
 getEl("inputFile").addEventListener("change", function () {
   stopPlayAll();
   var fileList = this.files;
-  console.log(fileList);
+  // console.log(fileList);
   if (fileList.length >0) {
     audioCtx = null;
     playAll.replaceWith(playAll.cloneNode(true)); // we must use a new element
@@ -264,7 +264,7 @@ getEl("inputFile").addEventListener("change", function () {
     getEl('aimLocalAudio').src = url;
     channels7 = getEl('aimLocalAudio');
     playAll.addEventListener('click', function () {
-      console.log('url', url);
+      // console.log('url', url);
       playAudio(this, channels7);
     }, false)
   }

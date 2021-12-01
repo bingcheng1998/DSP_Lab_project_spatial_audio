@@ -54,7 +54,7 @@ const initBallsColor = getInitBallsColor();
 
 window.addEventListener('music', function (event) {
   let maxValues = event.maxValues;
-  console.log('maxValues', maxValues, initBallsColor[0]);
+  // console.log('maxValues', maxValues, initBallsColor[0]);
   for (let i = 0; i < 8; i ++) {
     let ball = balls[i];
     let value = Math.min(maxValues[i], 30)/10 + 1.0;
@@ -106,13 +106,23 @@ new THREE.TextureLoader().load(
     scene.background = rt.texture;
   },
   function ( xhr ) {
-    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+    // console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
   },
   function (xhr) {
     console.log( 'An error happened' );
   }
 );
 
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
 
 const glb = require('../img/thefuture.glb');
 let headModel;

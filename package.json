@@ -1,29 +1,29 @@
 {
   "name": "SpatialAudio",
   "version": "0.0.1",
-  "description": "",
+  "description": "This is a demo for camera-based spatial audio",
   "keywords": "Spatial, Audio",
-  "license": "",
-  "author": "",
+  "license": "GPL",
+  "author": "Bingcheng Hu",
   "scripts": {
-    "build": "parcel build index.html",
-    "dev": "parcel index.html --open --https",
-    "start": "npm run build && npm run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm ./dist/* && parcel build index.html && sh fixSemanticClasses.sh",
+    "dev": "parcel index.html --open",
+    "start": "npm run build && npm run dev"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.16.0",
-    "parcel-bundler": "^1.12.5"
+    "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
     "@tensorflow-models/face-landmarks-detection": "^0.0.3",
     "@tensorflow/tfjs-backend-webgl": "^3.11.0",
     "@tensorflow/tfjs-converter": "^3.11.0",
     "@tensorflow/tfjs-core": "^3.11.0",
-    "babel-polyfill": "^6.26.0",
     "js": "^0.1.0",
     "stats-js": "^1.0.1",
     "stats.js": "^0.17.0",
     "three": "^0.134.0"
-  }
+  },
+  "browserslist": [
+    "since 2017-06"
+  ]
 }

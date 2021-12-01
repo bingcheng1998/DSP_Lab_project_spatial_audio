@@ -25,7 +25,8 @@ For 2D spatial audio, you can detect the direction of the audio, but the height 
 - [x] Do real time volume adjustment according to head position
 - [x] Find good voice for different spatial point
 - [x] 3D plot of head position and position of the spatial point
-- [ ] Use AI facial position detector to make a desktop version of spatial audio
+- [x] Use AI facial position detector to make a desktop version of spatial audio
+- [x] 3D version with Three.js
 
 ## References
 
@@ -35,4 +36,3 @@ For 2D spatial audio, you can detect the direction of the audio, but the height 
 - [Web audio spatialization basics](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Web_audio_spatialization_basics)
 - [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)
 - [Phone Orientaion](https://www.w3.org/TR/orientation-event/#description)
--

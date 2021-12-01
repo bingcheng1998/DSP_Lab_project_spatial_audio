@@ -1,195 +1,246 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Spatial Audio</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="Spatial Audio">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <link rel="icon" href="icon.png" type="image/x-icon">
   <link rel="shortcut icon" href="icon.png" type="image/x-icon">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/orientation.css">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
-<!--  <script src="semantic/semantic.min.js"></script>-->
-  <link rel="stylesheet" href="css/desktop-app.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <style>
+    .loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 120px;
+      height: 120px;
+      margin: -76px 0 0 -76px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+  </style>
 </head>
 
-<body>
+<body style="background-color:rgb(0,0,0);">
+<canvas id="bg"></canvas>
+<main>
+  <div id="stats" class="stats" style="left: 0;bottom: 0;position: absolute"></div>
+</main>
 
-<div class="phoneContent">
-  <div class="ui mini labeled icon inverted three item top fixed menu">
-    <a class="item" href="/">
-      <i class="gray home circle icon"></i>
-      Home
-    </a>
-    <a class="item" href="/spatial_audio_for_phones.html">
-      <i class="gray mobile alternate icon"></i>
-      Phones
-    </a>
-    <a class="item" href="/spatial_audio_for_desktop.html">
-      <i class="gray desktop icon"></i>
-      Desktop
-    </a>
+<video id="video" playsinline="" style="
+          -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+          display:none;
+          ">
+</video>
+
+<main class="loader"></main>
+
+<main>
+  <div class="full_height ui container" id="page1" style="position:relative;">
+    <h2 style="font-size: 80px;" class="big3DText">Spatial Audio</h2>
+
+    <div style='position: absolute;bottom: 10vh;left:5vw;right:5vw;margin-bottom: 10vh;'>
+      <p>Here is a virtual but warm greeting from <a href="https://bingcheng.openmc.cn">Bingcheng</a>, and hope you can enjoy this
+        journey in the world of Spatial Audio! 👏</p>
+      <p>You should wait for the progress bar to finish, and then you could see the model
+        move with your head movement (camera required).</p>
+      <p>If this page don't work, please check the <a href="/deprecated.html">deprecated page</a>.</p>
+    </div>
+
+    <div style='position: absolute;bottom: 0;left:0;margin-bottom: 10vh; width: 100%;'>
+      <div style="text-align:center; width: 100%;">
+        <i class="large icons">
+          <i class="inverted large angle double down icon"></i>
+        </i></div>
+    </div>
+
+
   </div>
-</div>
 
-<div class="deskContent">
-  <div class="ui vertical inverted sidebar menu left visible">
-    <div class='item'>
-      <a><b> </b></a>
+  <div class="full_height ui container" id="page2" style="position:relative;">
+    <div style='position: absolute;bottom: 0;left: 0vw;margin-bottom: 10vh;width: 100%;'>
+      <div style="text-align:center; width: 100%;">
+        <i class="large icons">
+          <!--          <i class="inverted big circle outline icon"></i>-->
+          <i class="inverted large angle double down icon"></i>
+        </i></div>
     </div>
-    <div class='item'>
-      <a class="ui logo icon image">
-        <img src="tile.png">
-      </a>
-      <a>
-        <b>Spatial Audio</b>
-      </a>
-    </div>
+    <div style='position: absolute;bottom: 30%;left: 5vw;margin-bottom: 10vh;'>
+      <h1>Mode Setting</h1>
+      <div class="ui toggle checkbox">
+        <input type="checkbox" checked="checked" id="mirror">
+        <label>-</label>
+      </div>Mirror Mode<p></p>
+      <div class="ui inverted form">
+        <div class="grouped fields">
+          <h3>Choose the audio source to play:</h3>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" id="audio1" checked="checked" name="musicChosen" data-aim="channels7">
+              <label>7.1 channel test voice</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" id="audio2" name="musicChosen" data-aim="sweetBoy">
+              <label>Test music from Apple Logic Pro</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" id="audioLocal" name="musicChosen" data-aim="aimLocalAudio">
+              <label>Local audio file</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="AllowLocalFile" style="display: none">
+        <h4>Upload your own audio file:</h4>
+        <p>Up to 7.1 channels are allowed; Stereo audio files can be used,
+          but for the best experience, it is best to choose 5.1 or 7.1 channel audio.</p>
+        <input type="file" id="inputFile" accept="audio/*">
+      </div>
 
-    <a class="item" href="/">
-      Home
-      <i class="gray home circle large icon"></i>
-    </a>
-    <a class="item" href="/spatial_audio_for_phones.html">
-      For phones only
-      <i class="gray mobile alternate large icon"></i>
-    </a>
-    <a class="item" href="/spatial_audio_for_desktop.html">
-      For desktop with camera
-      <i class="gray desktop large icon"></i>
-    </a>
-    <div class='item'>
-      <a><b> </b></a>
     </div>
-    <div class="right menu">
-      <div class="deskContent">
-        <a class="ui item" href="https://github.com/bingcheng1998/DSP_Lab_project_spatial_audio">
-          <div class="teal ui fluid button">
-            <i class="github icon"></i>Github
+  </div>
+
+  <div class="full_height ui container" id="page3" style="position:relative;">
+    <div style='position: absolute;bottom: 50%;left: 0vw;margin-bottom: 0vh;'>
+      <h1 style="margin-left: 5vw">Player Control</h1>
+      <div align="center">
+        <button data-playing="false" id="startPlay" class="controls-play ui toggle labeled icon button" role="switch" aria-checked="false">
+          <i class="play icon"></i>
+          <span>Start</span>
+        </button></div><p>
+
+      <div class="ui four column doubling grid container" style="text-align: center">
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b1" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Front Left</span>
+            </button>
           </div>
-        </a>
-        <a class="ui item" href="https://bingcheng.openmc.cn">
-          <div class="teal ui fluid button">
-            <i class="user icon"></i>About Author
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b2" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Front Right</span>
+            </button>
           </div>
-        </a>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b3" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Center</span>
+            </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b4" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon slash"></i>
+              <span>Low Freq </span>
+            </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b5" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Back Left</span>
+            </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b6" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Back Right</span>
+            </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b7" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Left Surr</span>
+            </button>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <button data-playing="false" id="b8" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
+              <i class="bell icon"></i>
+              <span>Right Surr</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- Add your site or application content here -->
-
-<div class=" dimmed">
-  <div style="color:white"><b>Designed by omniai.org</b></div>
-
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-
-  <div class="ui container">
-    <h1>Spatial Audio for General Devices</h1>
-
-    <a href="/cs.html">cs</a>
-
-    <p>Nowadays, as apple comes up with AirPods 3,
-      spatial audio is much hot and everyone wants
-      to try what’s spatial audio. Apple’s Logic pro
-      can edit spatial audio in nice GUI, which is a
-      huge support for making spatial audio.</p>
-
-    <img class="ui medium centered image" src="img/logicpro.webp">
-
-    <p>Actually, spatial audio has come up earlier than
-      Apple's AirPods pro. Sony's PS4 and PS5 both have
-      spatial audio with their specifically designed earphone.
-      However, both of these devices are expensive, and not
-      everyone has them (I have neither). So I want to implement
-      this spatial audio function with gyroscopes inside
-      smartphones. The demo image of my idea is as follows:</p>
-
-    <img class="ui small centered image" src="img/img1.png">
-
-    <p>Although it's not convenient to bind your
-      phone on the top of your head, it can be widely used for
-      everyone!</p>
-
-    <p>Here let’s check whether your phone
-      supports gyroscope on the web:</p>
-
-    <div id = 'doeSupported'></div>
-    </p>
-    <p>If your browser is supported and you are using your
-      phone now, let’s continue.</p>
-
-    <div class="ios_access"></div>
-
-    <p>You should see the arrow below move as
-      you move your phone.</p>
-  </div>
-  </p>
-  <div class="garden">
-    <div class="ball indicator"><img class="arrow" src="img/3d-up-arrow.svg" alt="Kiwi standing on oval"></div>
+    <div style='position: absolute;bottom: 0;left:0;margin-bottom: 10vh; width: 100%;'>
+      <div style="text-align:center; width: 100%;">
+        <i class="large icons">
+          <i class="inverted large angle double down icon"></i>
+        </i></div>
+    </div>
   </div>
 
-  <div class="ui container">
-    <p>You can also check the logs below:</p>
-  </div>
-<div class="ui message">
-  <pre class="output">Waiting for start...</pre>
-  <pre class="info"></pre>
-</div>
 
-
-  <div class="ui container">
-    </p>
-    <p>OK! It’s time to try the gyroscope-based spatial audio:</p>
-
-    <a class="ui center button" href="/spatial_audio_for_phones.html">Spatial Audio for phones with gyroscope</a>
-</p>
-    <p>BTW, we realized that wearing a mobile phone on
-      top of your head is rather stupid, so we decide to
-      make a new version with the camera. </p>
-
-    <p>You could use your front camera to measure the face direction. Though
-    there is a defect: your head can not turn back (or the camera can not
-    find your face). But this tool is cool!
-      Try it and you will not be disappointed!</p>
-
-    <img class="ui medium centered image" src="img/mesh.jpeg">
-
-    <a class="ui center button" href="/spatial_audio_for_desktop.html">Spatial Audio for devices with camera</a>
+  <div class="full_height ui container" id="page4" style="position:relative;">
+    <div style='position: absolute;bottom: 5vh;left: 0vw;margin-bottom: 0vh; width: 100%;text-align: center'>
+      <div class="ui divider"></div>
+      <div class="tooltip">
+        <div style="color: #175b7c">Acknowledgment</div>
+        <span class="tooltiptext">
+          <div class="ui bulleted list" style="text-align: left; margin-left: 5vw">
+            <div class="item">This is a course project for DSP Lab, NYU. Instructed by Prof. Selesnick.</div>
+            <div class="item">Inside construction of Apple's Airpods pro: <a href="https://www.youtube.com/watch?v=3vY3wuE7WVU">YouTube</a></div>
+            <div class="item">3D human head model: <a href="https://skfb.ly/6YUEu">Sketchfab</a> </div>
+            <div class="item">Multichannel 7.1 and 5.1 Wav Test Files: <a href="https://www.jensign.com/bdp95/7dot1voiced/index.html">jensign.com</a> </div>
+            <div class="item">7.1 surround sound: <a href="https://en.wikipedia.org/wiki/7.1_surround_sound">wikipedia</a> </div>
+            <div class="item">Spatial Audio Slides: <a href="https://brightspace.nyu.edu/d2l/le/lessons/113891/topics/5203695">NYU BrightSpace</a> </div>
+            <div class="item">Web audio spatialization basics: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Web_audio_spatialization_basics">Moz://a</a> </div>
+            <div class="item">Template music from Logic Pro</div>
+          </div>
+        </span>
+      </div>
+      <div style="font-size: 0.5rem; color: #838383">OmniAI.org</div>
+    </div>
   </div>
 
-  <script src="js/orientation.js"></script>
-  <script src="js/ios_access.js"></script>
+</main>
 
-  <div style="color:white"><b>Bingcheng Hu, 2021.10.27</b></div>
-  <div class="phoneContent">
-    <div style="color:white"><b>Powered by Omniai.org</b></div>
-    <div style="color:white"><b>http://omniai.org/</b></div>
-  </div>
-</div>
+<audio preload="none"  id="channels7" src="/assets/TestHuman7.1.wav" crossorigin="" loop></audio>
+<audio preload="none"  id="sweetBoy" src="/assets/apple-logic-pro.wav" crossorigin="" loop></audio>
+<audio preload="none"  id="aimLocalAudio" crossorigin="" loop></audio>
 
 
 
-<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-<!--  <script>-->
-<!--    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;-->
-<!--    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')-->
-<!--  </script>-->
-<!--  <script src="https://www.google-analytics.com/analytics.js" async></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>-->
+<script src="/js/cs_face_orientation.js"></script>
+<script src="/js/cs_audio.js"></script>
+<script src="/js/plot_head_movements.js"></script>
+
 </body>
-
 </html>

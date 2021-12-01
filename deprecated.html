@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Spatial Audio</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Spatial Audio">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/orientation.css">
+  <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+  <link rel="stylesheet" href="css/desktop-app.css">
+</head>
+
+<body>
+
+<div class="phoneContent">
+  <div class="ui mini labeled icon inverted three item top fixed menu">
+    <a class="item" href="/">
+      <i class="gray home circle icon"></i>
+      Home
+    </a>
+    <a class="item" href="/spatial_audio_for_phones.html">
+      <i class="gray mobile alternate icon"></i>
+      Phones
+    </a>
+    <a class="item" href="/spatial_audio_for_desktop.html">
+      <i class="gray desktop icon"></i>
+      Desktop
+    </a>
+  </div>
+</div>
+
+<div class="deskContent">
+  <div class="ui vertical inverted sidebar menu left visible">
+    <div class='item'>
+      <a><b> </b></a>
+    </div>
+    <div class='item'>
+      <a class="ui logo icon image">
+        <img src="tile.png">
+      </a>
+      <a>
+        <b>Spatial Audio</b>
+      </a>
+    </div>
+
+    <a class="item" href="/">
+      Home
+      <i class="gray home circle large icon"></i>
+    </a>
+    <a class="item" href="/spatial_audio_for_phones.html">
+      For phones only
+      <i class="gray mobile alternate large icon"></i>
+    </a>
+    <a class="item" href="/spatial_audio_for_desktop.html">
+      For desktop with camera
+      <i class="gray desktop large icon"></i>
+    </a>
+    <div class='item'>
+      <a><b> </b></a>
+    </div>
+    <div class="right menu">
+      <div class="deskContent">
+        <a class="ui item" href="https://github.com/bingcheng1998/DSP_Lab_project_spatial_audio">
+          <div class="teal ui fluid button">
+            <i class="github icon"></i>Github
+          </div>
+        </a>
+        <a class="ui item" href="https://bingcheng.openmc.cn">
+          <div class="teal ui fluid button">
+            <i class="user icon"></i>About Author
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add your site or application content here -->
+
+<div class=" dimmed">
+  <div style="color:white"><b>Designed by omniai.org</b></div>
+
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <div class="ui container">
+    <h1>Spatial Audio for General Devices</h1>
+
+<!--    <a href="/cs.html">cs</a>-->
+
+    <p>Nowadays, as apple comes up with AirPods 3,
+      spatial audio is much hot and everyone wants
+      to try what’s spatial audio. Apple’s Logic pro
+      can edit spatial audio in nice GUI, which is a
+      huge support for making spatial audio.</p>
+
+    <img class="ui medium centered image" src="img/logicpro.webp">
+
+    <p>Actually, spatial audio has come up earlier than
+      Apple's AirPods pro. Sony's PS4 and PS5 both have
+      spatial audio with their specifically designed earphone.
+      However, both of these devices are expensive, and not
+      everyone has them (I have neither). So I want to implement
+      this spatial audio function with gyroscopes inside
+      smartphones. The demo image of my idea is as follows:</p>
+
+    <img class="ui small centered image" src="img/img1.png">
+
+    <p>Although it's not convenient to bind your
+      phone on the top of your head, it can be widely used for
+      everyone!</p>
+
+    <p>Here let’s check whether your phone
+      supports gyroscope on the web:</p>
+
+    <div id = 'doeSupported'></div>
+    </p>
+    <p>If your browser is supported and you are using your
+      phone now, let’s continue.</p>
+
+    <div class="ios_access"></div>
+
+    <p>You should see the arrow below move as
+      you move your phone.</p>
+  </div>
+  </p>
+  <div class="garden">
+    <div class="ball indicator"><img class="arrow" src="img/3d-up-arrow.svg" alt="Kiwi standing on oval"></div>
+  </div>
+
+  <div class="ui container">
+    <p>You can also check the logs below:</p>
+  </div>
+<div class="ui message">
+  <pre class="output">Waiting for start...</pre>
+  <pre class="info"></pre>
+</div>
+
+
+  <div class="ui container">
+    </p>
+    <p>OK! It’s time to try the gyroscope-based spatial audio:</p>
+
+    <a class="ui center button" href="/spatial_audio_for_phones.html">Spatial Audio for phones with gyroscope</a>
+</p>
+    <p>BTW, we realized that wearing a mobile phone on
+      top of your head is rather stupid, so we decide to
+      make a new version with the camera. </p>
+
+    <p>You could use your front camera to measure the face direction. Though
+    there is a defect: your head can not turn back (or the camera can not
+    find your face). But this tool is cool!
+      Try it and you will not be disappointed!</p>
+
+    <img class="ui medium centered image" src="img/mesh.jpeg">
+
+    <a class="ui center button" href="/spatial_audio_for_desktop.html">Spatial Audio for devices with camera</a>
+  </div>
+
+  <script src="js/orientation.js"></script>
+  <script src="js/ios_access.js"></script>
+
+  <div style="color:white"><b>Bingcheng Hu, 2021.10.27</b></div>
+  <div class="phoneContent">
+    <div style="color:white"><b>Powered by Omniai.org</b></div>
+    <div style="color:white"><b>http://omniai.org/</b></div>
+  </div>
+</div>
+
+
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<!--  <script>-->
+<!--    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;-->
+<!--    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')-->
+<!--  </script>-->
+<!--  <script src="https://www.google-analytics.com/analytics.js" async></script>-->
+</body>
+
+</html>
