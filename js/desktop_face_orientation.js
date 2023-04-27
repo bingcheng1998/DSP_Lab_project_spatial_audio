@@ -291,9 +291,20 @@ async function main() {
   ctx.strokeStyle = GREEN;
   ctx.lineWidth = 0.5;
 
+  // model = await faceLandmarksDetection.load(
+  //   faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
+  //   {maxFaces: state.maxFaces});
+
   model = await faceLandmarksDetection.load(
     faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
-    {maxFaces: state.maxFaces});
+    {
+      maxFaces: state.maxFaces,
+      modelUrl: './facemesh_model.json',
+      detectorModelUrl: './blazeface_model.json',
+      irisModelUrl: './iris_model.json'
+    }
+  );
+
   renderPrediction();
 };
 

@@ -6,7 +6,8 @@
   "license": "GPL",
   "author": "Bingcheng Hu",
   "scripts": {
-    "build": "rm ./dist/* && parcel build index.html && sh fixSemanticClasses.sh",
+    "rm": "rm ./dist/* ",
+    "build": "parcel build index.html && sh fixSemanticClasses.sh && sh fixModel.sh",
     "dev": "parcel index.html --open",
     "start": "npm run build && npm run dev"
   },
