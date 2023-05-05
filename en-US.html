@@ -58,10 +58,11 @@
     <h2 style="font-size: 80px;" class="big3DText">Spatial Audio</h2>
 
     <div style='position: absolute;bottom: 10vh;left:5vw;right:5vw;margin-bottom: 10vh;'>
-      <p>欢迎来到 <a href="https://bingcheng.openmc.cn">炳城</a>的空间音频展示界面 👏</p>
-      <p>授权网页录像后，等待机器学习模型加载完成即可看到屏幕中的模型与你镜像运动！</p>
-      <p>项目源码可见<a href="https://github.com/bingcheng1998/DSP_Lab_project_spatial_audio">Github</a>.</p>
-      <p>We also provide <a href="/en-US.html">English version</a></p>
+      <p>Here is a virtual but warm greeting from <a href="https://bingcheng.openmc.cn">Bingcheng</a>, and hope you can enjoy this
+        journey in the world of Spatial Audio! 👏</p>
+      <p>You should wait for the progress bar to finish, and then you could see the model
+        move with your head movement (camera required).</p>
+      <p>If this page don't work, please check the <a href="/deprecated.html">deprecated page</a>.</p>
     </div>
 
     <div style='position: absolute;bottom: 0;left:0;margin-bottom: 10vh; width: 100%;'>
@@ -83,37 +84,38 @@
         </i></div>
     </div>
     <div style='position: absolute;bottom: 30%;left: 5vw;margin-bottom: 10vh;'>
-      <h1>设置</h1>
+      <h1>Mode Setting</h1>
       <div class="ui toggle checkbox">
         <input type="checkbox" checked="checked" id="mirror">
         <label>-</label>
-      </div>是否开启镜像<p></p>
+      </div>Mirror Mode<p></p>
       <div class="ui inverted form">
         <div class="grouped fields">
-          <h3>选择音源:</h3>
+          <h3>Choose the audio source to play:</h3>
           <div class="field">
             <div class="ui radio checkbox">
               <input type="radio" id="audio1" checked="checked" name="musicChosen" data-aim="channels7">
-              <label>7.1 声道指向测试</label>
+              <label>7.1 channel test voice</label>
             </div>
           </div>
           <div class="field">
             <div class="ui radio checkbox">
               <input type="radio" id="audio2" name="musicChosen" data-aim="sweetBoy">
-              <label>测试歌曲(from Apple Logic)</label>
+              <label>Test music from Apple Logic Pro</label>
             </div>
           </div>
           <div class="field">
             <div class="ui radio checkbox">
               <input type="radio" id="audioLocal" name="musicChosen" data-aim="aimLocalAudio">
-              <label>上传本地音乐</label>
+              <label>Local audio file</label>
             </div>
           </div>
         </div>
       </div>
       <div id="AllowLocalFile" style="display: none">
-        <h4>上传音频文件(wav,mp3,...):</h4>
-        <p>最高支持7.1声道，也支持单声道，但是声道越多效果越好。</p>
+        <h4>Upload your own audio file:</h4>
+        <p>Up to 7.1 channels are allowed; Stereo audio files can be used,
+          but for the best experience, it is best to choose 5.1 or 7.1 channel audio.</p>
         <input type="file" id="inputFile" accept="audio/*">
       </div>
 
@@ -122,12 +124,11 @@
 
   <div class="full_height ui container" id="page3" style="position:relative;">
     <div style='position: absolute;bottom: 50%;left: 0vw;margin-bottom: 0vh;'>
-      <h1 style="margin-left: 5vw">播放控制</h1>
-      <div>点击不同方位按钮可以关闭/打开各个虚拟的音源方向，初次体验可以尝试关闭所有方向，然后一个个打开，体验单个方向的震撼的指向性效果。</div>
+      <h1 style="margin-left: 5vw">Player Control</h1>
       <div align="center">
         <button data-playing="false" id="startPlay" class="controls-play ui toggle labeled icon button" role="switch" aria-checked="false">
           <i class="play icon"></i>
-          <span>播放</span>
+          <span>Start</span>
         </button></div><p>
 
       <div class="ui four column doubling grid container" style="text-align: center">
@@ -135,7 +136,7 @@
           <div class="ui segment">
             <button data-playing="false" id="b1" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
               <i class="bell icon"></i>
-              <span>左前方</span>
+              <span>Front Left</span>
             </button>
           </div>
         </div>
@@ -143,7 +144,7 @@
           <div class="ui segment">
             <button data-playing="false" id="b2" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
               <i class="bell icon"></i>
-              <span>右前方</span>
+              <span>Front Right</span>
             </button>
           </div>
         </div>
@@ -151,7 +152,7 @@
           <div class="ui segment">
             <button data-playing="false" id="b3" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
               <i class="bell icon"></i>
-              <span>前方</span>
+              <span>Center</span>
             </button>
           </div>
         </div>
@@ -159,7 +160,7 @@
           <div class="ui segment">
             <button data-playing="false" id="b4" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
               <i class="bell icon slash"></i>
-              <span>低频 </span>
+              <span>Low Freq </span>
             </button>
           </div>
         </div>
@@ -167,7 +168,7 @@
           <div class="ui segment">
             <button data-playing="false" id="b5" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
               <i class="bell icon"></i>
-              <span>左后方</span>
+              <span>Back Left</span>
             </button>
           </div>
         </div>
@@ -175,7 +176,7 @@
           <div class="ui segment">
             <button data-playing="false" id="b6" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
               <i class="bell icon"></i>
-              <span>右后方</span>
+              <span>Back Right</span>
             </button>
           </div>
         </div>
@@ -183,7 +184,7 @@
           <div class="ui segment">
             <button data-playing="false" id="b7" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
               <i class="bell icon"></i>
-              <span>左侧</span>
+              <span>Left Surr</span>
             </button>
           </div>
         </div>
@@ -191,7 +192,7 @@
           <div class="ui segment">
             <button data-playing="false" id="b8" class="fluid controls-play tiny ui toggle labeled icon button" role="switch" aria-checked="false">
               <i class="bell icon"></i>
-              <span>右侧</span>
+              <span>Right Surr</span>
             </button>
           </div>
         </div>

@@ -7,6 +7,7 @@ let n1, n2, n3, n4, n5, n6, n7, n8;
 let analysers = [n1, n2, n3, n4, n5, n6, n7, n8];
 let music_event = new CustomEvent('music', { 'detail': '' });
 music_event.maxValues = [0,0,0,0,0,0,0,0];
+let maxGain = 0.8;
 function init(audioElements) {
 
   audioCtx = new AudioContext();
@@ -112,7 +113,7 @@ function init(audioElements) {
     // add each track to the IMU control
     let playElement = audioPack[0];
     let pos = audioPack[1];
-    let gain = audioPack[2];
+    let gain = audioPack[2] === 1 ? maxGain : 0;
     let order = audioPack[3];
     analysers[order] = audioCtx.createAnalyser();
     // let analyser = analysers[order];
@@ -122,7 +123,7 @@ function init(audioElements) {
     playElement.addEventListener('click', function() {
       if (gainNode.gain.value === 0) {
         playElement.children[0].classList.remove("slash");
-        gainNode.gain.value = 1;
+        gainNode.gain.value = maxGain;
       } else {
         playElement.children[0].classList.add("slash");
         gainNode.gain.value = 0;
@@ -192,12 +193,12 @@ function playAudio(thisButton, audioElement) {
 const getEl = (id) => document.getElementById(id);
 const a1 = [getEl('b1'), [-5, 0,-5], 1, 0]; // FL
 const a2 = [getEl('b2'), [5, 0, -5], 1, 1]; // FR
-const a3 = [getEl('b3'), [0, 0, -5], 1, 2]; // C
+const a3 = [getEl('b3'), [0, 0, -7.5], 1, 2]; // C
 const a4 = [getEl('b4'), [0, 0,  0], 0, 3]; // LFE (mute by default)
 const a5 = [getEl('b5'), [-5, 0, 5], 1, 4]; // BL
 const a6 = [getEl('b6'), [5, 0,  5], 1, 5]; // BR
-const a7 = [getEl('b7'), [-5, 0, 0], 1, 6]; // SL
-const a8 = [getEl('b8'), [ 5, 0, 0], 1, 7]; // SR
+const a7 = [getEl('b7'), [-7.5, 0, 0], 1, 6]; // SL
+const a8 = [getEl('b8'), [ 7.5, 0, 0], 1, 7]; // SR
 const audioElements = [a1, a2, a3, a4, a5, a6, a7, a8];
 
 
